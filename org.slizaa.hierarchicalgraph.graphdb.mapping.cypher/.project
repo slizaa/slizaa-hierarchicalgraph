@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.slizaa.hierarchicalgraph.graphdb.mapping.opencypher</name>
+	<name>org.slizaa.hierarchicalgraph.graphdb.mapping.cypher</name>
 	<comment></comment>
 	<projects>
 	</projects>

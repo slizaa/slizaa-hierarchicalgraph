@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.slizaa.hierarchicalgraph.graphdb.mapping.opencypher;
+package org.slizaa.hierarchicalgraph.graphdb.mapping.cypher;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.slizaa.core.boltclient.IBoltClient;

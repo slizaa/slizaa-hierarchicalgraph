@@ -1,4 +1,4 @@
-package org.slizaa.hierarchicalgraph.graphdb.mapping.opencypher;
+package org.slizaa.hierarchicalgraph.graphdb.mapping.cypher;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

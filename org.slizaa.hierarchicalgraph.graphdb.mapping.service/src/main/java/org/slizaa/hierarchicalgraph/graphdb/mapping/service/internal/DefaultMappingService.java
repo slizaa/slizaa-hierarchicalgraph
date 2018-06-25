@@ -19,7 +19,7 @@ import org.slizaa.core.boltclient.IBoltClient;
 import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.hierarchicalgraph.HierarchicalgraphFactory;
 import org.slizaa.hierarchicalgraph.INodeSource;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.opencypher.IBoltClientAware;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.IBoltClientAware;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.service.IMappingParticipator;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.service.IMappingService;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.service.MappingException;

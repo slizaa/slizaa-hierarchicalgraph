@@ -14,11 +14,11 @@
 
 	<modules>
 		<module>org.slizaa.hierarchicalgraph.core.model</module>
+		<module>org.slizaa.hierarchicalgraph.core.algorithms</module>
 		<module>org.slizaa.hierarchicalgraph.graphdb.model</module>
 		<module>org.slizaa.hierarchicalgraph.graphdb.mapping.spi</module>
-		<module>org.slizaa.hierarchicalgraph.graphdb.mapping.opencypher</module>
+		<module>org.slizaa.hierarchicalgraph.graphdb.mapping.cypher</module>
 		<module>org.slizaa.hierarchicalgraph.graphdb.mapping.service</module>
-		<module>org.slizaa.hierarchicalgraph.core.algorithms</module>
 	</modules>
 
 	<build>

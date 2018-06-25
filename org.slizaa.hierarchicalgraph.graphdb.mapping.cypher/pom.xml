@@ -10,7 +10,7 @@
 	</parent>
 	
 	<groupId>org.slizaa.hierarchicalgraph.graphdb</groupId>
-	<artifactId>org.slizaa.hierarchicalgraph.graphdb.mapping.opencypher</artifactId>
+	<artifactId>org.slizaa.hierarchicalgraph.graphdb.mapping.cypher</artifactId>
 
 	<dependencies>
 		<dependency>
