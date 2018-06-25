@@ -1,0 +1,4 @@
+Bundle-SymbolicName: org.slizaa.hierarchicalgraph.graphdb.model;singleton:=true
+-exportcontents: org.slizaa.hierarchicalgraph.graphdb.model*
+-sources: true
+-sourcepath: src, target/workspace/org.slizaa.hierarchicalgraph.graphdb.model/src-gen
