@@ -8,7 +8,8 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.neo4j.driver.v1.types.Relationship;
 import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
+import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage;
+import org.slizaa.hierarchicalgraph.core.model.impl.StringToStringMapImpl;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbHierarchicalgraphPackage;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbRootNodeSource;
 
@@ -54,7 +55,7 @@ public class ExtendedGraphDbDependencySourceImpl extends GraphDbDependencySource
     // lazy init
     if (this.properties == null) {
       this.properties = new EcoreEMap<String, String>(HierarchicalgraphPackage.Literals.STRING_TO_STRING_MAP,
-          org.slizaa.hierarchicalgraph.impl.StringToStringMapImpl.class, this,
+          StringToStringMapImpl.class, this,
           GraphDbHierarchicalgraphPackage.GRAPH_DB_NODE_SOURCE__PROPERTIES);
     }
 

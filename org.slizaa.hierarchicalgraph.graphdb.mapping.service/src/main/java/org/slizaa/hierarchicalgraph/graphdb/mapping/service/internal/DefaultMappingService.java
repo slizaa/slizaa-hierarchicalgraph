@@ -16,9 +16,13 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.hierarchicalgraph.HGRootNode;
-import org.slizaa.hierarchicalgraph.HierarchicalgraphFactory;
-import org.slizaa.hierarchicalgraph.INodeSource;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactory;
+import org.slizaa.hierarchicalgraph.core.model.INodeSource;
+import org.slizaa.hierarchicalgraph.core.model.impl.ExtendedHGRootNodeImpl;
+import org.slizaa.hierarchicalgraph.core.model.spi.IAutoExpandInterceptor;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeComparator;
+import org.slizaa.hierarchicalgraph.core.model.spi.IProxyDependencyResolver;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.IBoltClientAware;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.service.IMappingParticipator;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.service.IMappingService;
@@ -30,10 +34,6 @@ import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbHierarchicalgraphFactory;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbNodeSource;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbRootNodeSource;
-import org.slizaa.hierarchicalgraph.impl.ExtendedHGRootNodeImpl;
-import org.slizaa.hierarchicalgraph.spi.IAutoExpandInterceptor;
-import org.slizaa.hierarchicalgraph.spi.INodeComparator;
-import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver;
 
 /**
  * <p>

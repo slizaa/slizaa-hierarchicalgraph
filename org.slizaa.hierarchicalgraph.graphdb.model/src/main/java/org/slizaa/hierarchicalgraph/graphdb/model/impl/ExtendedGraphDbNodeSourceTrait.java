@@ -15,8 +15,9 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.types.Node;
 import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage;
+import org.slizaa.hierarchicalgraph.core.model.impl.StringToStringMapImpl;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbHierarchicalgraphPackage;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbRootNodeSource;
 
@@ -153,7 +154,7 @@ public class ExtendedGraphDbNodeSourceTrait {
     if (this._nodeSource.properties == null) {
       this._nodeSource.properties = new EcoreEMap<String, String>(
           HierarchicalgraphPackage.Literals.STRING_TO_STRING_MAP,
-          org.slizaa.hierarchicalgraph.impl.StringToStringMapImpl.class, this._nodeSource,
+         StringToStringMapImpl.class, this._nodeSource,
           GraphDbHierarchicalgraphPackage.GRAPH_DB_NODE_SOURCE__PROPERTIES);
     } else {
       // clear the properties first

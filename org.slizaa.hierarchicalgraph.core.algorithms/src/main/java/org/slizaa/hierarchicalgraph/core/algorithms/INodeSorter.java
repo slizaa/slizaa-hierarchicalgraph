@@ -12,7 +12,7 @@ package org.slizaa.hierarchicalgraph.core.algorithms;
 
 import java.util.List;
 
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 public interface INodeSorter {
 

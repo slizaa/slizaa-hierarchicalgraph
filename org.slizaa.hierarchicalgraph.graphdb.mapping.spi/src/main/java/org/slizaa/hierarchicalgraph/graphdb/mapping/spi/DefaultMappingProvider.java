@@ -2,7 +2,7 @@ package org.slizaa.hierarchicalgraph.graphdb.mapping.spi;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.slizaa.hierarchicalgraph.spi.INodeComparator;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeComparator;
 
 /**
  * <p>

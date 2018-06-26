@@ -10,19 +10,19 @@ import java.util.function.Function;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
-import org.slizaa.hierarchicalgraph.HGCoreDependency;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.HGProxyDependency;
-import org.slizaa.hierarchicalgraph.HGRootNode;
-import org.slizaa.hierarchicalgraph.HierarchicalgraphFactory;
-import org.slizaa.hierarchicalgraph.HierarchicalgraphFactoryFunctions;
-import org.slizaa.hierarchicalgraph.IDependencySource;
-import org.slizaa.hierarchicalgraph.INodeSource;
+import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactory;
+import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactoryFunctions;
+import org.slizaa.hierarchicalgraph.core.model.IDependencySource;
+import org.slizaa.hierarchicalgraph.core.model.INodeSource;
+import org.slizaa.hierarchicalgraph.core.model.impl.ExtendedHGRootNodeImpl;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IProxyDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbDependencySource;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbHierarchicalgraphFactory;
-import org.slizaa.hierarchicalgraph.impl.ExtendedHGRootNodeImpl;
 
 /**
  * <p>

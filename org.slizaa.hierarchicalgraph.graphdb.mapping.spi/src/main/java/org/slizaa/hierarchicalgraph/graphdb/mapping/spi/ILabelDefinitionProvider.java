@@ -2,7 +2,7 @@ package org.slizaa.hierarchicalgraph.graphdb.mapping.spi;
 
 import java.net.URL;
 
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 public interface ILabelDefinitionProvider {
 

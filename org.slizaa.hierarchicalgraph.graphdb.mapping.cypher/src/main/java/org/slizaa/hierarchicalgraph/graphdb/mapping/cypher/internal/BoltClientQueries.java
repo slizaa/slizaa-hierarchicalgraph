@@ -16,8 +16,8 @@ import java.util.function.Function;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.DefaultDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
 

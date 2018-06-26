@@ -19,8 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
-import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGAggregatedDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 public class AdjacencyList {
 

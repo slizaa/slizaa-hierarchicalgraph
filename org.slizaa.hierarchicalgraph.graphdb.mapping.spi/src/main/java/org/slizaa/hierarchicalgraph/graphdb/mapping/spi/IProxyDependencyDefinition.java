@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.function.Function;
 
-import org.slizaa.hierarchicalgraph.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
 
 /**
  * <p>

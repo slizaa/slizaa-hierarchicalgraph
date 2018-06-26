@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 /**
  */

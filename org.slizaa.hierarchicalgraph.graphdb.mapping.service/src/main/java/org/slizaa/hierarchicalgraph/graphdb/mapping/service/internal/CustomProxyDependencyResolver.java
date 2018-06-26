@@ -9,11 +9,12 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.function.Function;
 
-import org.slizaa.hierarchicalgraph.HGCoreDependency;
-import org.slizaa.hierarchicalgraph.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.core.model.spi.IProxyDependencyResolver;
+import org.slizaa.hierarchicalgraph.core.model.spi.IProxyDependencyResolver.IProxyDependencyResolverJob;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbDependencySource;
-import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver;
 
 /**
  * <p>

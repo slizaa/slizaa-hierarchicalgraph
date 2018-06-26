@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="hierarchicalgraph" nsURI="http://org/slizaa/hierarchicalgraph"
-    nsPrefix="org.slizaa.hierarchicalgraph">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://org/slizaa/hierarchicalgraph/core/model"
+    nsPrefix="org.slizaa.hierarchicalgraph.core.model">
   <eClassifiers xsi:type="ecore:EClass" name="HGNode">
     <eOperations name="getIdentifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

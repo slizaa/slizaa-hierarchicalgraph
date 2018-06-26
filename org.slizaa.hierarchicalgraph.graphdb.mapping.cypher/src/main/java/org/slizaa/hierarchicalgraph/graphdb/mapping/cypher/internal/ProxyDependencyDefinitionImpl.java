@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.function.Function;
 
-import org.slizaa.hierarchicalgraph.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.DefaultDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IProxyDependencyDefinition;

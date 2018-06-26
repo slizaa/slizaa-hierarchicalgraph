@@ -1,8 +1,8 @@
 package org.slizaa.hierarchicalgraph.graphdb.model;
 
 import org.eclipse.emf.common.util.EMap;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 
 public class GraphUtil {
 

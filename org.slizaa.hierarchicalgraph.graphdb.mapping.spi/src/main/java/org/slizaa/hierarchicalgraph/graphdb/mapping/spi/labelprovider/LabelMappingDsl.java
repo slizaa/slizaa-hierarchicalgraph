@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider.OverlayPosition;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbNodeSource;
 

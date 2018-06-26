@@ -2,7 +2,7 @@ package org.slizaa.hierarchicalgraph.graphdb.mapping.service;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.service.internal.DefaultMappingService;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 

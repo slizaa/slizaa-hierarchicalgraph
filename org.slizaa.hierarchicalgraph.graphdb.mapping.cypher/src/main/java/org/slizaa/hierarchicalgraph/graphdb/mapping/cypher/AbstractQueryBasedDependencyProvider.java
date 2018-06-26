@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.hierarchicalgraph.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.internal.BoltClientQueries;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.internal.ProxyDependencyQueriesHolder;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;

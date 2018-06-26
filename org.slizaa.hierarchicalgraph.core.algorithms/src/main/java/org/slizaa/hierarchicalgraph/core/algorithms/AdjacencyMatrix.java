@@ -14,8 +14,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collection;
 
-import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGAggregatedDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 /**
  * <p>
