@@ -37,27 +37,6 @@
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>
-											org.slizaa.mojos
-										</groupId>
-										<artifactId>
-											ecoregenerator-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.0.0-SNAPSHOT,)
-										</versionRange>
-										<goals>
-											<goal>
-												generateFromEcore
-											</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
 											org.slizaa.core.mojos
 										</groupId>
 										<artifactId>
