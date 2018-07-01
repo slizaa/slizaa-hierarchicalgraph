@@ -22,9 +22,16 @@
 					<name>Sonatype Snapshot Repository</name>
 					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 					<layout>default</layout>
-					<snapshotPolicy>always</snapshotPolicy>
 				</repository>
 			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>ossrh</id>
+					<name>Sonatype Snapshot Repository</name>
+					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+					<layout>default</layout>
+				</pluginRepository>
+			</pluginRepositories>
 		</profile>
 	</profiles>
 </settings>
