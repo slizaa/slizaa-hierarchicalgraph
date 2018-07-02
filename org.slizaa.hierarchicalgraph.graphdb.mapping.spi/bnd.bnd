@@ -1,0 +1,3 @@
+-exportcontents: org.slizaa.hierarchicalgraph.graphdb.mapping.spi*
+-sources: true
+-sourcepath: src

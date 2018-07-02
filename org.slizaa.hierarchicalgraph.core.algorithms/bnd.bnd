@@ -1,0 +1,3 @@
+-exportcontents: org.slizaa.hierarchicalgraph.core.algorithms*
+-sources: true
+-sourcepath: src
