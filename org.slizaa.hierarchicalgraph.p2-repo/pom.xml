@@ -69,6 +69,25 @@
 										</artifact>
 									</artifacts>
 								</feature>
+								
+								<!-- test -->
+								<feature>
+									<id>org.slizaa.hierarchicalgraph.test.feature</id>
+									<version>${project.version}</version>
+									<label>org.slizaa.hierarchicalgraph.test.feature</label>
+									<providerName>${project.groupId}</providerName>
+									<description>${project.description}</description>
+									<license
+										url="https://www.eclipse.org/legal/epl-v10.html"></license>
+									<generateSourceFeature>false</generateSourceFeature>
+									<artifacts>
+										<artifact>
+											<id>org.slizaa.hierarchicalgraph.core:org.slizaa.hierarchicalgraph.core.testfwk:${project.version}</id>
+											<transitive>false</transitive>
+											<source>true</source>
+										</artifact>
+									</artifacts>
+								</feature>
 							</featureDefinitions>
 						</configuration>
 					</execution>
