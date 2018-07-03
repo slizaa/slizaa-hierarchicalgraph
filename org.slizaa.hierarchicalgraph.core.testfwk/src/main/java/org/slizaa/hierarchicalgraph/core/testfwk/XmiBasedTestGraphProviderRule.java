@@ -1,4 +1,4 @@
-package org.slizaa.hierarchicalgraph.core.model.testfwk;
+package org.slizaa.hierarchicalgraph.core.testfwk;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -71,8 +71,6 @@ public class XmiBasedTestGraphProviderRule implements TestRule {
       @Override
       public void evaluate() throws Throwable {
 
-        CustomFactoryStandaloneSupport.registerCustomHierarchicalgraphFactory();
-        
         _rootNode = load(_testGraph.getXmiFileName());
 
         // configure the resulting graph if necessary
@@ -123,6 +121,9 @@ public class XmiBasedTestGraphProviderRule implements TestRule {
    */
   private static HGRootNode load(String fileName) {
 
+    //
+    CustomFactoryStandaloneSupport.registerCustomHierarchicalgraphFactory();
+    
     // register extension, see:
     // https://wiki.eclipse.org/EMF/FAQ#How_do_I_use_EMF_in_standalone_applications_.28such_as_an_ordinary_main.29.3F
     Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("hggraph", new XMIResourceFactoryImpl());

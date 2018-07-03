@@ -1,11 +1,11 @@
-package org.slizaa.hierarchicalgraph.core.model.mapstruct;
+package org.slizaa.hierarchicalgraph.core.testfwk.mapstruct;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.slizaa.hierarchicalgraph.core.model.testfwk.XmiBasedGraph;
-import org.slizaa.hierarchicalgraph.core.model.testfwk.XmiBasedTestGraphProviderRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedGraph;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedTestGraphProviderRule;
 
 /**
  * <p>
