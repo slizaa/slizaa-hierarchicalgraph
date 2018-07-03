@@ -48,6 +48,16 @@
 											<source>true</source>
 										</artifact>
 										<artifact>
+											<id>org.slizaa.hierarchicalgraph.core:org.slizaa.hierarchicalgraph.core.selections:${project.version}</id>
+											<transitive>false</transitive>
+											<source>true</source>
+										</artifact>
+										<artifact>
+											<id>org.slizaa.hierarchicalgraph.core:org.slizaa.hierarchicalgraph.core.workbench.model:${project.version}</id>
+											<transitive>false</transitive>
+											<source>true</source>
+										</artifact>
+										<artifact>
 											<id>org.slizaa.hierarchicalgraph.graphdb:org.slizaa.hierarchicalgraph.graphdb.model:${project.version}</id>
 											<transitive>false</transitive>
 											<source>true</source>
