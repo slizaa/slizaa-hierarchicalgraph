@@ -57,8 +57,8 @@
 		<module>org.slizaa.hierarchicalgraph.graphdb.mapping.spi</module>
 		<module>org.slizaa.hierarchicalgraph.graphdb.mapping.cypher</module>
 		<module>org.slizaa.hierarchicalgraph.graphdb.mapping.service</module>
-		<module>org.slizaa.hierarchicalgraph.p2-repo</module>
 		<module>org.slizaa.hierarchicalgraph.core.testfwk</module>
+		<module>org.slizaa.hierarchicalgraph.p2-repo</module>
 	</modules>
 
 	<build>
