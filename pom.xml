@@ -61,6 +61,7 @@
 		<module>org.slizaa.hierarchicalgraph.graphdb.mapping.cypher</module>
 		<module>org.slizaa.hierarchicalgraph.graphdb.mapping.service</module>
 		<module>org.slizaa.hierarchicalgraph.p2-repo</module>
+		<module>org.slizaa.hierarchicalgraph.graphdb.testfwk</module>
 	</modules>
 
 	<build>
