@@ -96,6 +96,11 @@
 											<transitive>false</transitive>
 											<source>true</source>
 										</artifact>
+										<artifact>
+											<id>org.slizaa.hierarchicalgraph.graphdb:org.slizaa.hierarchicalgraph.graphdb.testfwk:${project.version}</id>
+											<transitive>false</transitive>
+											<source>true</source>
+										</artifact>
 									</artifacts>
 								</feature>
 							</featureDefinitions>
