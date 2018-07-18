@@ -1,12 +1,11 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.service;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.slizaa.core.boltclient.testfwk.BoltClientConnectionRule;
-import org.slizaa.hierarchicalgraph.algorithms.AdjacencyMatrix;
+import org.slizaa.hierarchicalgraph.core.algorithms.AdjacencyMatrix;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.service.internal.DefaultMappingService;
 import org.slizaa.hierarchicalgraph.graphdb.testfwk.SimpleJTypeMappingProvider;

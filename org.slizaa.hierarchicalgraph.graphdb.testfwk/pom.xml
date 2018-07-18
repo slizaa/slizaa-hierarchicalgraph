@@ -1,26 +1,47 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.slizaa.hierarchicalgraph</groupId>
-    <artifactId>org.slizaa.hierarchicalgraph.parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
-  <groupId>org.slizaa.hierarchicalgraph.graphdb</groupId>
-  <artifactId>org.slizaa.hierarchicalgraph.graphdb.testfwk</artifactId>
-  <dependencies>
-  	<dependency>
-  		<groupId>org.slizaa.hierarchicalgraph.graphdb</groupId>
-  		<artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.slizaa.hierarchicalgraph</groupId>
+		<artifactId>org.slizaa.hierarchicalgraph.parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<groupId>org.slizaa.hierarchicalgraph.graphdb</groupId>
+	<artifactId>org.slizaa.hierarchicalgraph.graphdb.testfwk</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>org.slizaa.hierarchicalgraph.graphdb</groupId>
+			<artifactId>
   			org.slizaa.hierarchicalgraph.graphdb.mapping.spi
   		</artifactId>
-  		<version>1.0.0-SNAPSHOT</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.slizaa.hierarchicalgraph.graphdb</groupId>
-  		<artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slizaa.hierarchicalgraph.graphdb</groupId>
+			<artifactId>
   			org.slizaa.hierarchicalgraph.graphdb.mapping.cypher
   		</artifactId>
-  		<version>1.0.0-SNAPSHOT</version>
-  	</dependency>
-  </dependencies>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slizaa.scanner.core</groupId>
+			<artifactId>org.slizaa.scanner.core.spi-api</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slizaa.core</groupId>
+			<artifactId>org.slizaa.core.mvnresolver.api</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slizaa.core</groupId>
+			<artifactId>org.slizaa.core.mvnresolver.implementation</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
