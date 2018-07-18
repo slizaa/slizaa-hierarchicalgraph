@@ -6,41 +6,29 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ServiceLoader;
+import java.util.function.Consumer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.junit.rules.ExternalResource;
-import org.slizaa.core.mvnresolver.api.IMvnResolverService;
+import org.slizaa.core.mvnresolver.api.IMvnResolverService.IMvnResolverJob;
 import org.slizaa.scanner.core.api.graphdb.IGraphDb;
-import org.slizaa.scanner.core.api.graphdb.IGraphDbFactory;
+import org.slizaa.scanner.core.testfwk.AbstractSlizaaTestServerRule;
 
-public class PredefinedGraphDatabaseRule extends ExternalResource {
-
-  /** - */
-  private TestDB      _testDB;
-
-  /** - */
-  private int         _port;
-
-  /** - */
-  private Path        _tempParentDirectoryPath;
+/**
+ * <p>
+ * </p>
+ *
+ * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
+ */
+public class PredefinedGraphDatabaseRule extends AbstractSlizaaTestServerRule {
 
   /** - */
-  private IGraphDb    _graphDatabase;
+  private TestDB _testDB;
 
   /** - */
-  private ClassLoader _classLoader;
+  private int    _port;
 
   /**
    * <p>
@@ -48,45 +36,76 @@ public class PredefinedGraphDatabaseRule extends ExternalResource {
    * </p>
    *
    * @param testDB
+   * @param port
    */
   public PredefinedGraphDatabaseRule(TestDB testDB, int port) {
-    this._testDB = checkNotNull(testDB);
-    this._port = port;
+    super(createBackendLoaderConfigurer());
+
+    //
+    _testDB = checkNotNull(testDB);
+    _port = port;
   }
 
+  /**
+   * <p>
+   * Creates a new instance of type {@link PredefinedGraphDatabaseRule}.
+   * </p>
+   *
+   * @param testDB
+   * @param port
+   * @param backendLoaderConfigurer
+   */
+  public PredefinedGraphDatabaseRule(TestDB testDB, int port, Consumer<IMvnResolverJob> backendLoaderConfigurer) {
+    super(backendLoaderConfigurer);
+
+    //
+    _testDB = checkNotNull(testDB);
+    _port = port;
+  }
+
+  /**
+   * <p>
+   * Creates a new instance of type {@link PredefinedGraphDatabaseRule}.
+   * </p>
+   *
+   * @param testDB
+   * @param port
+   * @param workingDirectory
+   * @param backendLoaderConfigurer
+   */
+  public PredefinedGraphDatabaseRule(TestDB testDB, int port, File workingDirectory,
+      Consumer<IMvnResolverJob> backendLoaderConfigurer) {
+    super(workingDirectory, backendLoaderConfigurer);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   @Override
-  protected void before() throws Throwable {
+  protected IGraphDb createGraphDatabase(ITestFwkBackEnd testFwkBackEnd) throws IOException {
 
     //
-    this._tempParentDirectoryPath = Files.createTempDirectory("TestNeo4jServerCreatorServiceTempDirectory");
+    Path tempParentDirectoryPath = Files.createTempDirectory("TestNeo4jServerCreatorServiceTempDirectory");
 
     //
-    File databaseDirectory = unzipDatabase(this._testDB, this._tempParentDirectoryPath);
+    File databaseDirectory = unzipDatabase(this._testDB, tempParentDirectoryPath);
 
     //
-    this._graphDatabase = createGraphDb(this._port, databaseDirectory);
+    executeWithThreadContextClassLoader(testFwkBackEnd.getClassLoader(),
+        () -> setGraphDb(testFwkBackEnd.getGraphDbFactory().newGraphDb(_port, databaseDirectory).create()));
+
+    // create new GraphDb
+    return getGraphDb();
   }
 
-  @Override
-  protected void after() {
-
-    //
-    try {
-      this._graphDatabase.close();
-    } catch (Exception e) {
-      //
-    }
-
-    //
-    if (this._tempParentDirectoryPath != null) {
-      try {
-        delete(this._tempParentDirectoryPath);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
-    }
-  }
-
+  /**
+   * <p>
+   * </p>
+   *
+   * @param testDB
+   * @param parentDirectory
+   * @return
+   */
   private File unzipDatabase(TestDB testDB, Path parentDirectory) {
 
     //
@@ -112,80 +131,10 @@ public class PredefinedGraphDatabaseRule extends ExternalResource {
   /**
    * <p>
    * </p>
-   */
-  private IGraphDb createGraphDb(int port, File databaseDir)
-      throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-
-    //
-    IMvnResolverService mvnResolverService = MvnResolverServiceFactoryFactory.createNewResolverServiceFactory()
-        .newMvnResolverService().withDefaultRemoteRepository()
-        .withRemoteRepository("ossrh", "https://oss.sonatype.org/content/repositories/snapshots").create();
-
-    File[] files = mvnResolverService
-        .resolve("org.slizaa.scanner.neo4j:org.slizaa.scanner.neo4j.graphdbfactory:1.0.0-SNAPSHOT");
-
-    //
-    List<URL> urls = new ArrayList<>(files.length);
-    for (File file : files) {
-      if (file.getName().contains("org.slizaa.scanner.core.spi-api")) {
-        continue;
-      }
-      urls.add(file.toURI().toURL());
-    }
-
-    //
-    this._classLoader = new URLClassLoader(urls.toArray(new URL[0]),
-        PredefinedGraphDatabaseRule.class.getClassLoader());
-    Class<?> clazz = this._classLoader.loadClass("org.slizaa.scanner.neo4j.graphdbfactory.internal.GraphDbFactory");
-
-    //
-    ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
-    try {
-
-      Thread.currentThread().setContextClassLoader(this._classLoader);
-
-      //
-      IGraphDbFactory graphDbFactory = (IGraphDbFactory) clazz.newInstance();
-
-      // create new GraphDb
-      return graphDbFactory.newGraphDb(port, databaseDir).create();
-    }
-
-    // don't forget to reset the old class loader
-    finally {
-
-      //
-      Thread.currentThread().setContextClassLoader(oldClassLoader);
-    }
-  }
-
-  /**
-   * <p>
-   * </p>
    *
-   * @param path
-   * @throws IOException
+   * @param inputStream
+   * @param folder
    */
-  private static void delete(Path path) throws IOException {
-
-    //
-    Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
-
-      @Override
-      public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        Files.delete(file);
-        return FileVisitResult.CONTINUE;
-      }
-
-      @Override
-      public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-        Files.delete(dir);
-        return FileVisitResult.CONTINUE;
-      }
-
-    });
-  }
-
   private static void unzip(InputStream inputStream, File folder) {
 
     checkNotNull(inputStream);
@@ -234,8 +183,20 @@ public class PredefinedGraphDatabaseRule extends ExternalResource {
     }
   }
 
-  private void jkdsfk() {
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
+  private static Consumer<IMvnResolverJob> createBackendLoaderConfigurer() {
 
-    ServiceLoader<IMvnFact>.load(clazz).iterator();
+    // @formatter:off
+    return job -> job
+        .withDependency("org.slizaa.scanner.neo4j:org.slizaa.scanner.neo4j.importer:1.0.0-SNAPSHOT")
+        .withDependency("org.slizaa.scanner.neo4j:org.slizaa.scanner.neo4j.graphdbfactory:1.0.0-SNAPSHOT")
+        .withExclusionPattern("*:org.slizaa.scanner.core.spi-api")
+        .withExclusionPattern("*:jdk.tools");
+    // @formatter:on
   }
 }

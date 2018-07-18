@@ -7,10 +7,9 @@ import org.junit.Test;
 import org.slizaa.core.boltclient.testfwk.BoltClientConnectionRule;
 import org.slizaa.hierarchicalgraph.core.algorithms.AdjacencyMatrix;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.service.internal.DefaultMappingService;
-import org.slizaa.hierarchicalgraph.graphdb.testfwk.SimpleJTypeMappingProvider;
-import org.slizaa.neo4j.graphdb.testfwk.PredefinedGraphDatabaseRule;
-import org.slizaa.neo4j.graphdb.testfwk.TestDB;
+import org.slizaa.hierarchicalgraph.graphdb.testfwk.PredefinedGraphDatabaseRule;
+import org.slizaa.hierarchicalgraph.graphdb.testfwk.TestDB;
+import org.slizaa.hierarchicalgraph.graphdb.testfwk.mapping.SimpleJTypeMappingProvider;
 
 /**
  * <p>
@@ -30,11 +29,16 @@ public class MappingServiceTest {
   /**
    * <p>
    * </p>
+   * 
+   * @throws ClassNotFoundException
    */
   @Test
-  public void testMappingService() {
+  public void testMappingService() throws ClassNotFoundException {
 
-    IMappingService mappingService = new DefaultMappingService();
+    // TODO: WORK-AROUND FOR SECURITY-EXCEPTION-BUG
+    Class<?> clazz = this.getClass().getClassLoader().loadClass("org.eclipse.core.runtime.SubMonitor");
+
+    IMappingService mappingService = MappingFactory.createMappingServiceForStandaloneSetup();
 
     HGRootNode rootNode = mappingService.convert(new SimpleJTypeMappingProvider(),
         _boltClientConnection.getBoltClient(), null);

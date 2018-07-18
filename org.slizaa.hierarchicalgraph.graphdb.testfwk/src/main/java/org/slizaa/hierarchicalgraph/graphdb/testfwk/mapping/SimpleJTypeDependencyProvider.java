@@ -1,4 +1,4 @@
-package org.slizaa.hierarchicalgraph.graphdb.testfwk;
+package org.slizaa.hierarchicalgraph.graphdb.testfwk.mapping;
 
 import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.AbstractQueryBasedDependencyProvider;
 

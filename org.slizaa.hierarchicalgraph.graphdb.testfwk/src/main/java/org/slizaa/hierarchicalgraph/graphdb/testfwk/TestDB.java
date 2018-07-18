@@ -11,7 +11,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public enum TestDB {
   
   /** - */
-  MAPSTRUCT("mapstruct-db", "/org/slizaa/neo4j/graphdb/testfwk/testdbs/mapstruct_1-2-0-Final-db.zip");
+  MAPSTRUCT("mapstruct-db", "/mapstruct_1-2-0-Final-db.zip");
   
   /**
    * <p>
