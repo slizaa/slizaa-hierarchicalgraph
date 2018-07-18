@@ -7,9 +7,9 @@ import org.junit.Test;
 import org.slizaa.core.boltclient.testfwk.BoltClientConnectionRule;
 import org.slizaa.hierarchicalgraph.core.algorithms.AdjacencyMatrix;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
-import org.slizaa.hierarchicalgraph.graphdb.testfwk.PredefinedGraphDatabaseRule;
-import org.slizaa.hierarchicalgraph.graphdb.testfwk.TestDB;
 import org.slizaa.hierarchicalgraph.graphdb.testfwk.mapping.SimpleJTypeMappingProvider;
+import org.slizaa.scanner.core.testfwk.PredefinedGraphDatabaseRule;
+import org.slizaa.scanner.core.testfwk.TestDB;
 
 /**
  * <p>
