@@ -77,7 +77,6 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
 
     if (result != null) {
       checkState(checkNotNull(type).isAssignableFrom(result.getClass()));
-      return null;
     }
 
     return (T) result;
