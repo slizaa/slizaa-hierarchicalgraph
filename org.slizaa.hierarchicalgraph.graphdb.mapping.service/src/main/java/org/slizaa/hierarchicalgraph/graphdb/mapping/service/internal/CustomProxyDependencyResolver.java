@@ -12,7 +12,6 @@ import java.util.function.Function;
 import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
 import org.slizaa.hierarchicalgraph.core.model.spi.IProxyDependencyResolver;
-import org.slizaa.hierarchicalgraph.core.model.spi.IProxyDependencyResolver.IProxyDependencyResolverJob;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbDependencySource;
 
@@ -24,26 +23,12 @@ import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbDependencySource;
  */
 public class CustomProxyDependencyResolver implements IProxyDependencyResolver {
 
-  /** - */
-  private static final boolean DEBUG = true;
-
   /**
    * {@inheritDoc}
    */
   @Override
   public IProxyDependencyResolverJob resolveProxyDependency(final HGProxyDependency dependency) {
-
-    checkNotNull(dependency);
-
-    //
-    if (DEBUG) {
-      System.out.println("--- CustomProxyDependencyResolver ---");
-      System.out.println(String.format("Resolving ProxyDependencyDefinitionImpl from '%s' to '%s'.",
-          dependency.getFrom().getIdentifier(), dependency.getTo().getIdentifier()));
-    }
-
-    //
-    return new ProxyDependencyResolverJob(dependency);
+    return new ProxyDependencyResolverJob(checkNotNull(dependency));
   }
 
   /**
@@ -106,9 +91,6 @@ public class CustomProxyDependencyResolver implements IProxyDependencyResolver {
 
       //
       this._proxyDependency.getResolvedCoreDependencies().addAll(coreDependencies);
-
-      //
-      System.out.println("SPONKIE: " + coreDependencies);
     }
   }
 }
