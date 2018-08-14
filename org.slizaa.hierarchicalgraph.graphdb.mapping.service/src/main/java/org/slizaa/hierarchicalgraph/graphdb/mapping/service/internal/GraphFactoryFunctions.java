@@ -167,17 +167,28 @@ public class GraphFactoryFunctions {
         Function<HGProxyDependency, List<Future<List<IDependencyDefinition>>>> resolveFunction = checkNotNull(
             proxyDependency.getResolveFunction());
 
+        
         //
         HGCoreDependency slizaaProxyDependency = createDependency(proxyDependency.getIdStart(),
-            proxyDependency.getIdTarget(), proxyDependency.getIdTarget(), proxyDependency.getType(), rootElement,
+            proxyDependency.getIdTarget(), proxyDependency.getIdRel(), proxyDependency.getType(), rootElement,
             dependencySourceCreator, resolveFunction, reinitializeCaches);
 
-        // TODO: Should we really use the user object here?
-        ((GraphDbDependencySource) slizaaProxyDependency.getDependencySource())
-            .setUserObject(proxyDependency.getResolveFunction());
-
         //
-        result.add(slizaaProxyDependency);
+        if (slizaaProxyDependency != null) {
+          
+          // TODO: Should we really use the user object here?
+          ((GraphDbDependencySource) slizaaProxyDependency.getDependencySource())
+              .setUserObject(proxyDependency.getResolveFunction());
+
+          //
+          result.add(slizaaProxyDependency);
+        }
+        
+        //
+        else {
+          System.out.println("Dependency is null for " + proxyDependency.getIdStart() + " : " + proxyDependency.getIdTarget());
+        }
+
       }
 
       //
