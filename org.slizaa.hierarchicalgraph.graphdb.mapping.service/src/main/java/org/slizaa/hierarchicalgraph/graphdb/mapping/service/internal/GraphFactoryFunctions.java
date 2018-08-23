@@ -10,6 +10,8 @@ import java.util.function.Function;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
+import org.neo4j.driver.v1.types.Node;
+import org.slizaa.core.boltclient.IBoltClient;
 import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
@@ -167,7 +169,6 @@ public class GraphFactoryFunctions {
         Function<HGProxyDependency, List<Future<List<IDependencyDefinition>>>> resolveFunction = checkNotNull(
             proxyDependency.getResolveFunction());
 
-        
         //
         HGCoreDependency slizaaProxyDependency = createDependency(proxyDependency.getIdStart(),
             proxyDependency.getIdTarget(), proxyDependency.getIdRel(), proxyDependency.getType(), rootElement,
@@ -175,7 +176,7 @@ public class GraphFactoryFunctions {
 
         //
         if (slizaaProxyDependency != null) {
-          
+
           // TODO: Should we really use the user object here?
           ((GraphDbDependencySource) slizaaProxyDependency.getDependencySource())
               .setUserObject(proxyDependency.getResolveFunction());
@@ -183,10 +184,21 @@ public class GraphFactoryFunctions {
           //
           result.add(slizaaProxyDependency);
         }
-        
+
         //
         else {
-          System.out.println("Dependency is null for " + proxyDependency.getIdStart() + " : " + proxyDependency.getIdTarget());
+
+          // TODO!
+
+          //
+          IBoltClient boltClient = rootElement.getExtension(IBoltClient.class);
+          Node startNode = boltClient.getNode(proxyDependency.getIdStart());
+          Node targetNode = boltClient.getNode(proxyDependency.getIdTarget());
+
+          System.out.println(
+              "Dependency is null for " + proxyDependency.getIdStart() + " : " + proxyDependency.getIdTarget());
+          System.out.println(startNode.labels() + " : " + startNode.asMap());
+          System.out.println(targetNode.labels() + " : " + targetNode.asMap());
         }
 
       }

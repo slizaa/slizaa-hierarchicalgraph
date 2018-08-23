@@ -84,6 +84,7 @@ public class DefaultMappingService implements IMappingService {
 
       // create the root element
       final HGRootNode rootNode = HierarchicalgraphFactory.eINSTANCE.createHGRootNode();
+      rootNode.registerExtension(IBoltClient.class, boltClient);
       GraphDbRootNodeSource rootNodeSource = GraphDbHierarchicalgraphFactory.eINSTANCE.createGraphDbRootNodeSource();
       rootNodeSource.setIdentifier(-1l);
       rootNodeSource.setBoldClient(boltClient);
@@ -127,7 +128,7 @@ public class DefaultMappingService implements IMappingService {
       }
 
       // register default extensions
-      rootNode.registerExtension(IBoltClient.class, boltClient);
+
       rootNode.registerExtension(IProxyDependencyResolver.class, new CustomProxyDependencyResolver());
       rootNode.registerExtension(IMappingProvider.class, mappingDescriptor);
       rootNode.registerExtension(INodeComparator.class, mappingDescriptor.getNodeComparator());
