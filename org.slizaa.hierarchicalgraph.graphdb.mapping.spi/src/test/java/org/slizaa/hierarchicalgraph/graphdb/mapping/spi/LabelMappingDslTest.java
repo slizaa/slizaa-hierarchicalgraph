@@ -3,12 +3,41 @@ package org.slizaa.hierarchicalgraph.graphdb.mapping.spi;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
+import org.slizaa.hierarchicalgraph.core.model.CustomFactoryStandaloneSupport;
+import org.slizaa.hierarchicalgraph.core.model.DefaultNodeSource;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactory;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider.OverlayPosition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.DefaultLabelDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.LabelMappingDsl;
 
 public class LabelMappingDslTest extends LabelMappingDsl {
+
+  @Test
+  public void testSetText() {
+    DefaultLabelDefinition labelDefinition = process(setText("test"));
+    assertThat(labelDefinition.getText()).isNotNull().isEqualTo("test");
+  }
+
+  @Test
+  public void testSetText_Null() {
+    DefaultLabelDefinition labelDefinition = process(setText(null));
+    assertThat(labelDefinition.getText()).isNull();
+  }
+
+/*
+  @Test
+  public void testSetText_PropertyValue() {
+    DefaultLabelDefinition labelDefinition = process(setLabelText(propertyValue("test")));
+    assertThat(labelDefinition.getText()).isNotNull().isEqualTo("test");
+  }
+
+  @Test
+  public void testSetText_PropertyValue_Null() {
+    DefaultLabelDefinition labelDefinition = process(setText(null));
+    assertThat(labelDefinition.getText()).isNull();
+  }
+*/
 
   /**
    * <p>
@@ -144,8 +173,20 @@ public class LabelMappingDslTest extends LabelMappingDsl {
    * @return
    */
   protected DefaultLabelDefinition process(LabelDefinitionProcessor processor) {
+
+    //
+    CustomFactoryStandaloneSupport.registerCustomHierarchicalgraphFactory();
+
+    //
     DefaultLabelDefinition labelDefinition = new DefaultLabelDefinition();
-    processor.processLabelDefinition(HierarchicalgraphFactory.eINSTANCE.createHGNode(), labelDefinition);
+
+    //
+    HGNode hgNode = HierarchicalgraphFactory.eINSTANCE.createHGNode();
+    DefaultNodeSource nodeSource = HierarchicalgraphFactory.eINSTANCE.createDefaultNodeSource();
+    nodeSource.getProperties().put("test", "testValue");
+    hgNode.setNodeSource(nodeSource);
+
+    processor.processLabelDefinition(hgNode, labelDefinition);
     return labelDefinition;
   }
 }

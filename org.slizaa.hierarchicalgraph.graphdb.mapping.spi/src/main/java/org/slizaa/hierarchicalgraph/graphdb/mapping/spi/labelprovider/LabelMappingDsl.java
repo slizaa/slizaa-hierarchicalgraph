@@ -28,9 +28,9 @@ public class LabelMappingDsl {
 
     default LabelDefinitionProcessor and(LabelDefinitionProcessor next) {
       Objects.requireNonNull(next);
-      return (n, l) -> {
-        processLabelDefinition(n, l);
-        next.processLabelDefinition(n, l);
+      return (hgNode, l) -> {
+        processLabelDefinition(hgNode, l);
+        next.processLabelDefinition(hgNode, l);
       };
     }
   }
@@ -70,9 +70,9 @@ public class LabelMappingDsl {
       checkNotNull(processor);
 
       //
-      return (n, l) -> {
-        if (this._condition.apply(n)) {
-          processor.processLabelDefinition(n, l);
+      return (hgNode, labelDefinition) -> {
+        if (this._condition.apply(hgNode)) {
+          processor.processLabelDefinition(hgNode, labelDefinition);
         }
       };
     }
@@ -207,6 +207,7 @@ public class LabelMappingDsl {
         checkNotNull(overlayPosition));
   }
 
+  // TODO: Rename to setLabelText
   public LabelDefinitionProcessor setText(String textLabel) {
     return (node, labeldefinition) -> labeldefinition.setText(textLabel);
   }
