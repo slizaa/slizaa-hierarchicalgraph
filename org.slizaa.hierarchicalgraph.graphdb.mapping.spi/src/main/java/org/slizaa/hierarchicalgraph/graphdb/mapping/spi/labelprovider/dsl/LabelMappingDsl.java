@@ -40,7 +40,7 @@ public class LabelMappingDsl {
 
           @Override
           public Map<String, String> getProperties() {
-            return (Map<String, String>) hgNode.getNodeSource(GraphDbNodeSource.class).get().getProperties();
+            return hgNode.getNodeSource(GraphDbNodeSource.class).get().getProperties().map();
           }
 
           @Override
