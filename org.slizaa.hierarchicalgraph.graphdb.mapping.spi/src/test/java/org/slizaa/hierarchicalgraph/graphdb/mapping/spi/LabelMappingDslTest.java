@@ -1,43 +1,33 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.spi;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Test;
-import org.slizaa.hierarchicalgraph.core.model.CustomFactoryStandaloneSupport;
-import org.slizaa.hierarchicalgraph.core.model.DefaultNodeSource;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
-import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactory;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider.OverlayPosition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.DefaultLabelDefinition;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.LabelMappingDsl;
 
-public class LabelMappingDslTest extends LabelMappingDsl {
+import java.util.function.Function;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class LabelMappingDslTest extends AbstractLabelMappingDslTest {
 
   @Test
   public void testSetText() {
-    DefaultLabelDefinition labelDefinition = process(setText("test"));
+    DefaultLabelDefinition labelDefinition = process(setLabelText("test"), createHGNode());
     assertThat(labelDefinition.getText()).isNotNull().isEqualTo("test");
   }
 
   @Test
-  public void testSetText_Null() {
-    DefaultLabelDefinition labelDefinition = process(setText(null));
+  public void testSetText_Null_1() {
+    DefaultLabelDefinition labelDefinition = process(setLabelText((String) null), createHGNode());
     assertThat(labelDefinition.getText()).isNull();
   }
 
-/*
   @Test
-  public void testSetText_PropertyValue() {
-    DefaultLabelDefinition labelDefinition = process(setLabelText(propertyValue("test")));
-    assertThat(labelDefinition.getText()).isNotNull().isEqualTo("test");
+  public void testSetText_Null_2() {
+    DefaultLabelDefinition labelDefinition = process(setLabelText((Function<HGNode, String>) null), createHGNode());
+    assertThat(labelDefinition.getText()).isNotNull().isEqualTo("<<LABEL_MAPPING_IS_NULL: (666) >>");
   }
-
-  @Test
-  public void testSetText_PropertyValue_Null() {
-    DefaultLabelDefinition labelDefinition = process(setText(null));
-    assertThat(labelDefinition.getText()).isNull();
-  }
-*/
 
   /**
    * <p>
@@ -47,7 +37,7 @@ public class LabelMappingDslTest extends LabelMappingDsl {
   public void testSetBaseImage() {
 
     //
-    DefaultLabelDefinition labelDefinition = process(setBaseImage(fromClasspath("icons/final_co.png")));
+    DefaultLabelDefinition labelDefinition = process(setBaseImage(fromClasspath("icons/final_co.png")), createHGNode());
 
     //
     assertThat(labelDefinition.getBaseImage()).isNotNull().isEqualTo(fromClasspath("icons/final_co.png"));
@@ -62,22 +52,25 @@ public class LabelMappingDslTest extends LabelMappingDsl {
 
     //
     DefaultLabelDefinition labelDefinition = process(
-        setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.TOP_RIGHT));
+        setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.TOP_RIGHT), createHGNode());
     assertThat(labelDefinition.getOverlayImage(OverlayPosition.TOP_RIGHT)).isNotNull()
         .isEqualTo(fromClasspath("icons/final_co.png"));
 
     //
-    labelDefinition = process(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.TOP_LEFT));
+    labelDefinition = process(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.TOP_LEFT),
+        createHGNode());
     assertThat(labelDefinition.getOverlayImage(OverlayPosition.TOP_LEFT)).isNotNull()
         .isEqualTo(fromClasspath("icons/final_co.png"));
 
     //
-    labelDefinition = process(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.BOTTOM_RIGHT));
+    labelDefinition = process(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.BOTTOM_RIGHT),
+        createHGNode());
     assertThat(labelDefinition.getOverlayImage(OverlayPosition.BOTTOM_RIGHT)).isNotNull()
         .isEqualTo(fromClasspath("icons/final_co.png"));
 
     //
-    labelDefinition = process(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.BOTTOM_LEFT));
+    labelDefinition = process(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.BOTTOM_LEFT),
+        createHGNode());
     assertThat(labelDefinition.getOverlayImage(OverlayPosition.BOTTOM_LEFT)).isNotNull()
         .isEqualTo(fromClasspath("icons/final_co.png"));
   }
@@ -92,11 +85,11 @@ public class LabelMappingDslTest extends LabelMappingDsl {
     //@formatter:off
     DefaultLabelDefinition labelDefinition = process(
 
-      exclusiveChoice().
-        when(n -> false).then(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.TOP_RIGHT)).
-        when(n -> false).then(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.TOP_LEFT)).
-        otherwise(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.BOTTOM_RIGHT))
-    );
+        exclusiveChoice().
+            when(n -> false).then(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.TOP_RIGHT)).
+            when(n -> false).then(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.TOP_LEFT)).
+            otherwise(setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.BOTTOM_RIGHT))
+        , createHGNode());
     //@formatter:on
 
     //
@@ -121,7 +114,7 @@ public class LabelMappingDslTest extends LabelMappingDsl {
             setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.BOTTOM_RIGHT),
             setOverlayImage(fromClasspath("icons/final_co.png"), OverlayPosition.BOTTOM_LEFT)
         )
-    );
+        , createHGNode());
     //@formatter:on
 
     //
@@ -144,7 +137,7 @@ public class LabelMappingDslTest extends LabelMappingDsl {
 
     //
     DefaultLabelDefinition labelDefinition = process(
-        when(n -> true).then(setBaseImage(fromClasspath("icons/final_co.png"))));
+        when(n -> true).then(setBaseImage(fromClasspath("icons/final_co.png"))), createHGNode());
 
     //
     assertThat(labelDefinition.getBaseImage()).isNotNull().isEqualTo(fromClasspath("icons/final_co.png"));
@@ -159,34 +152,9 @@ public class LabelMappingDslTest extends LabelMappingDsl {
 
     //
     DefaultLabelDefinition labelDefinition = process(
-        when(n -> false).then(setBaseImage(fromClasspath("icons/final_co.png"))));
+        when(n -> false).then(setBaseImage(fromClasspath("icons/final_co.png"))), createHGNode());
 
     //
     assertThat(labelDefinition.getBaseImage()).isNull();
-  }
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @param processor
-   * @return
-   */
-  protected DefaultLabelDefinition process(LabelDefinitionProcessor processor) {
-
-    //
-    CustomFactoryStandaloneSupport.registerCustomHierarchicalgraphFactory();
-
-    //
-    DefaultLabelDefinition labelDefinition = new DefaultLabelDefinition();
-
-    //
-    HGNode hgNode = HierarchicalgraphFactory.eINSTANCE.createHGNode();
-    DefaultNodeSource nodeSource = HierarchicalgraphFactory.eINSTANCE.createDefaultNodeSource();
-    nodeSource.getProperties().put("test", "testValue");
-    hgNode.setNodeSource(nodeSource);
-
-    processor.processLabelDefinition(hgNode, labelDefinition);
-    return labelDefinition;
   }
 }

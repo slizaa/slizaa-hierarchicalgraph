@@ -2,6 +2,11 @@ package org.slizaa.hierarchicalgraph.graphdb.mapping.spi;
 
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
+/**
+ * <p>
+ *
+ * </p>
+ */
 public interface INodeSorter {
 
   /**

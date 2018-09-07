@@ -2,6 +2,7 @@ package org.slizaa.hierarchicalgraph.graphdb.testfwk.mapping;
 
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.AbstractLabelDefinitionProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.dsl.ILabelDefinitionProcessor;
 
 /**
  * <p>
@@ -16,7 +17,7 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
    * {@inheritDoc}
    */
   @Override
-  protected LabelDefinitionProcessor createLabelDefinitionProcessor() {
+  protected ILabelDefinitionProcessor createLabelDefinitionProcessor() {
 
     //@formatter:off
     return exclusiveChoice().
@@ -46,7 +47,7 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
    *
    * @return
    */
-  protected LabelDefinitionProcessor layoutModule() {
+  protected ILabelDefinitionProcessor layoutModule() {
     return setBaseImage(fromClasspath("icons/jar_obj.png")).and(setLabelText(propertyValue("name")));
   }
 
@@ -56,7 +57,7 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
    *
    * @return
    */
-  protected LabelDefinitionProcessor layoutDirectory() {
+  protected ILabelDefinitionProcessor layoutDirectory() {
 
     //@formatter:off
     return exclusiveChoice().
@@ -72,7 +73,7 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
     //@formatter:on
   }
 
-  private LabelDefinitionProcessor layoutResource() {
+  private ILabelDefinitionProcessor layoutResource() {
 
     //@formatter:off
     return executeAll(
@@ -92,7 +93,7 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
    *
    * @return
    */
-  protected LabelDefinitionProcessor layoutType() {
+  protected ILabelDefinitionProcessor layoutType() {
 
     //@formatter:off
     return executeAll(

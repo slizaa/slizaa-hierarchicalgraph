@@ -1,9 +1,14 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.dsl.ILabelAndPropertyProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.dsl.ILabelDefinitionProcessor;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.dsl.LabelMappingDsl;
+
+import java.util.function.Function;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * <p>
@@ -14,7 +19,24 @@ import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider
 public abstract class AbstractLabelDefinitionProvider extends LabelMappingDsl implements ILabelDefinitionProvider {
 
   /** - */
-  private LabelDefinitionProcessor _processor;
+  private ILabelDefinitionProcessor _processor;
+
+  /**
+   * Creates a new instance of {@link AbstractLabelDefinitionProvider} with the given adapter function.
+   *
+   * @param labelAndPropertyProviderAdapterFunction
+   */
+  public AbstractLabelDefinitionProvider(
+      Function<HGNode, ILabelAndPropertyProvider> labelAndPropertyProviderAdapterFunction) {
+    super(labelAndPropertyProviderAdapterFunction);
+  }
+
+  /**
+   *
+   */
+  public AbstractLabelDefinitionProvider() {
+    super();
+  }
 
   /**
    * {@inheritDoc}
@@ -38,7 +60,7 @@ public abstract class AbstractLabelDefinitionProvider extends LabelMappingDsl im
    *
    * @return
    */
-  protected abstract LabelDefinitionProcessor createLabelDefinitionProcessor();
+  protected abstract ILabelDefinitionProcessor createLabelDefinitionProcessor();
 
   /**
    * <p>
@@ -46,7 +68,7 @@ public abstract class AbstractLabelDefinitionProvider extends LabelMappingDsl im
    *
    * @return
    */
-  private LabelDefinitionProcessor processor() {
+  private ILabelDefinitionProcessor processor() {
 
     //
     if (this._processor == null) {
