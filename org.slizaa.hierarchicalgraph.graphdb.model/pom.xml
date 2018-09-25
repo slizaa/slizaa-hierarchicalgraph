@@ -69,8 +69,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.slizaa.scanner.core</groupId>
-			<artifactId>org.slizaa.scanner.core.testfwk</artifactId>
+			<groupId>org.slizaa.scanner</groupId>
+			<artifactId>org.slizaa.scanner.testfwk</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>

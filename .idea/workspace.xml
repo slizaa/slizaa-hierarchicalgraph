@@ -202,7 +202,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/slizaa/scanner/core/org.slizaa.scanner.core.testfwk/1.0.0-SNAPSHOT/org.slizaa.scanner.core.testfwk-1.0.0-SNAPSHOT.jar!/org/slizaa/scanner/core/testfwk/internal/BackEndLoader.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/slizaa/scanner/core/org.slizaa.scanner.testfwk/1.0.0-SNAPSHOT/org.slizaa.scanner.testfwk-1.0.0-SNAPSHOT.jar!/org/slizaa/scanner/core/testfwk/internal/BackEndLoader.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="53" selection-start-line="53" selection-end-line="53" />

@@ -15,8 +15,8 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.slizaa.core.boltclient.IBoltClient;
 import org.slizaa.core.boltclient.testfwk.BoltClientConnectionRule;
-import org.slizaa.scanner.core.testfwk.PredefinedGraphDatabaseRule;
-import org.slizaa.scanner.core.testfwk.TestDB;
+import org.slizaa.scanner.testfwk.PredefinedGraphDatabaseRule;
+import org.slizaa.scanner.testfwk.TestDB;
 
 import com.google.common.collect.Lists;
 
