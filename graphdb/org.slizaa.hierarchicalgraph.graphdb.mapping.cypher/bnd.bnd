@@ -1,0 +1,3 @@
+-exportcontents: org.slizaa.hierarchicalgraph.graphdb.mapping.cypher*
+-sources: true
+-sourcepath: src
