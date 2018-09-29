@@ -7,9 +7,8 @@ import org.junit.Test;
 import org.slizaa.core.boltclient.testfwk.BoltClientConnectionRule;
 import org.slizaa.hierarchicalgraph.core.algorithms.AdjacencyMatrix;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
+import org.slizaa.hierarchicalgraph.graphdb.testfwk.GraphDatabaseSetupRule;
 import org.slizaa.hierarchicalgraph.graphdb.testfwk.mapping.SimpleJTypeMappingProvider;
-import org.slizaa.scanner.testfwk.PredefinedGraphDatabaseRule;
-import org.slizaa.scanner.testfwk.TestDB;
 
 /**
  * <p>
@@ -20,16 +19,12 @@ import org.slizaa.scanner.testfwk.TestDB;
 public class MappingServiceTest {
 
   @ClassRule
-  public static PredefinedGraphDatabaseRule _predefinedGraphDatabase = new PredefinedGraphDatabaseRule(TestDB.MAPSTRUCT,
-      5001);
-
-  @ClassRule
-  public static BoltClientConnectionRule    _boltClientConnection    = new BoltClientConnectionRule("localhost", 5001);
+  public static GraphDatabaseSetupRule graphDatabaseSetup = new GraphDatabaseSetupRule("/mapstruct_1-2-0-Final-db.zip");
 
   /**
    * <p>
    * </p>
-   * 
+   *
    * @throws ClassNotFoundException
    */
   @Test
@@ -40,8 +35,8 @@ public class MappingServiceTest {
 
     IMappingService mappingService = MappingFactory.createMappingServiceForStandaloneSetup();
 
-    HGRootNode rootNode = mappingService.convert(new SimpleJTypeMappingProvider(),
-        _boltClientConnection.getBoltClient(), null);
+    HGRootNode rootNode = mappingService
+        .convert(new SimpleJTypeMappingProvider(), graphDatabaseSetup.getBoltClient(), null);
 
     assertThat(rootNode.getChildren()).hasSize(2);
 
