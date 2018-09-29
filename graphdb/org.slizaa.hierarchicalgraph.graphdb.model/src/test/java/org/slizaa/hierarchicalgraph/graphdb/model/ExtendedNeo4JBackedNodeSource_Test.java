@@ -1,22 +1,24 @@
 package org.slizaa.hierarchicalgraph.graphdb.model;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactoryFunctions.createNewNode;
-import static org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactoryFunctions.createNewRootNode;
-
-import java.util.concurrent.ExecutionException;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.*;
+import org.neo4j.graphdb.factory.GraphDatabaseSettings;
+import org.neo4j.harness.junit.Neo4jRule;
 import org.slizaa.core.boltclient.testfwk.BoltClientConnectionRule;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
-import org.slizaa.scanner.testfwk.PredefinedGraphDatabaseRule;
-import org.slizaa.scanner.testfwk.TestDB;
+import org.slizaa.hierarchicalgraph.graphdb.testfwk.GraphDatabaseSetupRule;
+import org.slizaa.hierarchicalgraph.graphdb.testfwk.PredefinedDatabaseDirectoryRule;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.util.concurrent.ExecutionException;
+
+import static org.neo4j.graphdb.factory.GraphDatabaseSettings.boltConnector;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactoryFunctions.createNewNode;
+import static org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactoryFunctions.createNewRootNode;
 
 /**
  * <p>
@@ -31,11 +33,7 @@ public class ExtendedNeo4JBackedNodeSource_Test {
   }
 
   @ClassRule
-  public static PredefinedGraphDatabaseRule _predefinedGraphDatabase = new PredefinedGraphDatabaseRule(TestDB.MAPSTRUCT,
-      5001);
-
-  @ClassRule
-  public static BoltClientConnectionRule    _boltClientConnection    = new BoltClientConnectionRule("localhost", 5001);
+  public static GraphDatabaseSetupRule graphDatabaseSetup = new GraphDatabaseSetupRule("/mapstruct_1-2-0-Final-db.zip");
 
   /** - */
   private HGRootNode                        _rootNode;
@@ -53,7 +51,7 @@ public class ExtendedNeo4JBackedNodeSource_Test {
       GraphDbRootNodeSource result = GraphDbHierarchicalgraphFactory.eINSTANCE.createGraphDbRootNodeSource();
 
       // set the repository
-      result.setBoldClient(_boltClientConnection.getBoltClient());
+      result.setBoldClient(graphDatabaseSetup.getBoltClient());
 
       // return the result
       return result;
@@ -68,7 +66,7 @@ public class ExtendedNeo4JBackedNodeSource_Test {
       try {
 
         // set the repository
-        nodeSource.setIdentifier(NodeIdFinder.getDoGetMapperMethod(_boltClientConnection.getBoltClient()));
+        nodeSource.setIdentifier(NodeIdFinder.getDoGetMapperMethod(graphDatabaseSetup.getBoltClient()));
 
       } catch (Exception e) {
         e.printStackTrace();
@@ -117,5 +115,13 @@ public class ExtendedNeo4JBackedNodeSource_Test {
     assertThat(labels).isNotNull();
     assertThat(labels).hasSize(1);
     assertThat(labels).contains("Method");
+  }
+
+  private static int findFreePort() {
+    try (ServerSocket socket = new ServerSocket(0)) {
+      return socket.getLocalPort();
+    } catch (IOException e) {
+      throw new RuntimeException(e.getMessage(), e);
+    }
   }
 }

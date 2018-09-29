@@ -13,10 +13,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.neo4j.harness.junit.Neo4jRule;
 import org.slizaa.core.boltclient.IBoltClient;
 import org.slizaa.core.boltclient.testfwk.BoltClientConnectionRule;
 
 import com.google.common.collect.Lists;
+import org.slizaa.hierarchicalgraph.graphdb.testfwk.GraphDatabaseSetupRule;
+import org.slizaa.hierarchicalgraph.graphdb.testfwk.PredefinedDatabaseDirectoryRule;
 
 /**
  * <p>
@@ -33,11 +36,7 @@ public class ExtendedNeo4JRemoteRepository_GetNodeLabels_Test {
   }
 
   @ClassRule
-  public static PredefinedGraphDatabaseRule _predefinedGraphDatabase = new PredefinedGraphDatabaseRule(TestDB.MAPSTRUCT,
-      5001);
-
-  @ClassRule
-  public static BoltClientConnectionRule    _boltClientConnection    = new BoltClientConnectionRule("localhost", 5001);
+  public static GraphDatabaseSetupRule graphDatabaseSetup = new GraphDatabaseSetupRule("/mapstruct_1-2-0-Final-db.zip");
 
   /** - */
   private Function<IBoltClient, Long>       _nodeIdProvider;
@@ -66,7 +65,7 @@ public class ExtendedNeo4JRemoteRepository_GetNodeLabels_Test {
   @Test
   public void getNodeProperties() {
 
-    IBoltClient boltClient = _boltClientConnection.getBoltClient();
+    IBoltClient boltClient = graphDatabaseSetup.getBoltClient();
 
     List<String> labels = Lists.newArrayList(boltClient.getNode(_nodeIdProvider.apply(boltClient)).labels());
     assertThat(labels).containsExactlyElementsOf(_expectedLabels);

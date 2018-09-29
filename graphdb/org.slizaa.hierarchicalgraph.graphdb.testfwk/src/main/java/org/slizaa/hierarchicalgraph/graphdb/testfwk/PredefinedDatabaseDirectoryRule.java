@@ -1,19 +1,21 @@
 package org.slizaa.hierarchicalgraph.graphdb.testfwk;
 
-import com.google.common.io.Files;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.imageio.IIOException;
+import java.io.*;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 /**
  *
@@ -23,19 +25,33 @@ public class PredefinedDatabaseDirectoryRule implements TestRule {
   //
   private File parent;
 
+  //
   private InputStream inputStream;
 
   /**
-   *
    * @param inputStream
    */
   public PredefinedDatabaseDirectoryRule(InputStream inputStream, File parent) {
     this.inputStream = checkNotNull(inputStream);
-    unzipDatabase(parent, inputStream);
+    this.parent = checkNotNull(parent);
   }
 
   /**
-   *
+   * @param inputStream
+   * @throws IOException
+   */
+  public PredefinedDatabaseDirectoryRule(InputStream inputStream) {
+    this(inputStream, createTempDirectory());
+  }
+
+  /**
+   * @return
+   */
+  public File getParentDirectory() {
+    return parent;
+  }
+
+  /**
    * @param base
    * @param description
    * @return
@@ -47,43 +63,28 @@ public class PredefinedDatabaseDirectoryRule implements TestRule {
 
       @Override
       public void evaluate() throws Throwable {
-
-
+        unzipDatabase(parent, inputStream);
 
         base.evaluate();
-        // TODO
-        // databaseDirectory.delete();
+
+        // delete the old database directory...
+        try {
+
+          // get the root path
+          Path rootPath = Paths.get(parent.getAbsolutePath());
+
+          // delete all contained files
+          Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS).sorted(Comparator.reverseOrder()).map(Path::toFile)
+              .forEach(File::delete);
+
+        } catch (IOException e) {
+          // simply ignore
+        }
       }
     };
   }
 
-//  /**
-//   *
-//   * @param zippedDatabaseStream
-//   * @return
-//   */
-//  private static File unzipDatabase(InputStream zippedDatabaseStream) {
-//
-//    //
-//    checkNotNull(zippedDatabaseStream);
-//
-//    File databaseDirectory = Files.createTempDir();
-//
-//    //
-//    if (!databaseDirectory.exists()) {
-//      try {
-//        unzip(zippedDatabaseStream, new File(databaseDirectory, "databases/graph.db"));
-//      } catch (Exception e) {
-//        throw new RuntimeException(e);
-//      }
-//    }
-//
-//    //
-//    return databaseDirectory;
-//  }
-
   /**
-   *
    * @param parentDirectory
    * @param zippedDatabaseStream
    * @return
@@ -95,13 +96,16 @@ public class PredefinedDatabaseDirectoryRule implements TestRule {
     checkNotNull(zippedDatabaseStream);
 
     //
-//    if (!parentDirectory.exists()) {
+    File realDir = new File(parentDirectory, "databases/graph.db");
+
+    //
+    //if (!realDir.exists()) {
       try {
-        unzip(zippedDatabaseStream, new File(parentDirectory, "databases/graph.db"));
+        unzip(zippedDatabaseStream, realDir);
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
-//    }
+    //}
 
     //
     return parentDirectory.getAbsolutePath();
@@ -125,7 +129,7 @@ public class PredefinedDatabaseDirectoryRule implements TestRule {
 
       // create output directory is not exists
       if (!folder.exists()) {
-        folder.mkdir();
+        folder.mkdirs();
       }
 
       // get the zip file content
@@ -162,4 +166,22 @@ public class PredefinedDatabaseDirectoryRule implements TestRule {
     }
   }
 
+//  private static File createTempFileWithDirOldWay() {
+//    try {
+//      File tempDir = new File("D:\\sssss_hurz", "PredefinedDatabaseDirectoryRule_");
+//      if (!tempDir.exists() && !tempDir.mkdirs())
+//        throw new IIOException("Failed to create temporary directory " + tempDir);
+//      return tempDir;
+//    } catch (IOException e) {
+//      throw new RuntimeException(e);
+//    }
+//  }
+
+  private static File createTempDirectory() {
+    try {
+      return Files.createTempDirectory("PredefinedDatabaseDirectoryRule_").toFile();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
