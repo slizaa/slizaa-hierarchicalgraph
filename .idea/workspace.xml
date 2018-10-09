@@ -3,18 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d1cfcccb-33eb-4a8c-8941-e8ae7d71e2e2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.algorithms/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.algorithms/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.model/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.model/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.selections/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.selections/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.testfwk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.testfwk/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.workbench.model/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.workbench.model/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.cypher/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.cypher/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.service/src/test/java/org/slizaa/hierarchicalgraph/graphdb/mapping/service/MappingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.service/src/test/java/org/slizaa/hierarchicalgraph/graphdb/mapping/service/MappingServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.spi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.spi/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.testfwk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.mapping.testfwk/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.model/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.model/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.testfwk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/graphdb/org.slizaa.hierarchicalgraph.graphdb.testfwk/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/org.slizaa.hierarchicalgraph.p2-repo/target/" />
     <ignored path="$PROJECT_DIR$/org.slizaa.hierarchicalgraph.graphdb.model/target/" />
@@ -51,7 +39,7 @@
     <session id="-2098420421">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.0" value="6" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.13" value="1" />
@@ -64,7 +52,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="10" />
-          <entry key="java" value="33" />
+          <entry key="java" value="34" />
           <entry key="txt" value="1" />
           <entry key="xml" value="39" />
         </counts>
@@ -72,7 +60,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="10" />
-          <entry key="JAVA" value="33" />
+          <entry key="JAVA" value="34" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="XML" value="39" />
         </counts>
@@ -81,14 +69,14 @@
         <counts>
           <entry key="dummy" value="29" />
           <entry key="java" value="1830" />
-          <entry key="txt" value="37" />
+          <entry key="txt" value="101" />
           <entry key="xml" value="226" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="1830" />
-          <entry key="PLAIN_TEXT" value="66" />
+          <entry key="PLAIN_TEXT" value="130" />
           <entry key="XML" value="226" />
         </counts>
       </usages-collector>
@@ -397,18 +385,18 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19669509" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19669509" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.43944266" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.43944266" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3992467" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.18113612" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.44587353" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3279743" />
@@ -428,7 +416,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refactoring/added graphdb.testfwk" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring/added graphdb.testfwk" />
+    <MESSAGE value="removed dependencies to slizaa.scanner / build clean-up" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed dependencies to slizaa.scanner / build clean-up" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://$MAVEN_REPOSITORY$/org/slizaa/scanner/core/org.slizaa.scanner.testfwk/1.0.0-SNAPSHOT/org.slizaa.scanner.testfwk-1.0.0-SNAPSHOT.jar!/org/slizaa/scanner/core/testfwk/internal/BackEndLoader.class" />
@@ -566,6 +555,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1877#2169#0" expanded="true" />
+            <element signature="e#2168#2169#0" expanded="true" />
+            <element signature="e#2243#2244#0" expanded="true" />
+            <element signature="e#2297#2298#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -694,6 +690,13 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/org.slizaa.hierarchicalgraph.core.workbench.model/src/main/java/org/slizaa/hierarchicalgraph/core/workbench/model/internal/Activator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="56" selection-start-line="4" selection-start-column="56" selection-end-line="4" selection-end-column="56" />
         </state>
       </provider>
     </entry>
