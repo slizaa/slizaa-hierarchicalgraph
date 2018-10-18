@@ -3,8 +3,8 @@
  */
 package org.slizaa.hierarchicalgraph.graphdb.mapping.cypher;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.scanner.api.util.IProgressMonitor;
 
 /**
  * <p>

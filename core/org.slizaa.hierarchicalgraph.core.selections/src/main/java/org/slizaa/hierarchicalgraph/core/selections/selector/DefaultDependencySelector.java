@@ -12,14 +12,9 @@ package org.slizaa.hierarchicalgraph.core.selections.selector;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -83,14 +78,12 @@ public class DefaultDependencySelector implements IDependencySelector {
   private Adapter                                           _adapter;
 
   /** - */
-  private ListenerList<IDependencySelectorListener>         _listenerList;
+  private List<IDependencySelectorListener> _listenerList;
 
   /**
    * <p>
    * Creates a new instance of type {@link DefaultDependencySelector}.
    * </p>
-   * 
-   * @param dependencies
    */
   public DefaultDependencySelector() {
 
@@ -103,7 +96,7 @@ public class DefaultDependencySelector implements IDependencySelector {
     _filteredTargetNodes = new HashSet<>();
     _selectedNodes = new HashSet<HGNode>();
     _selectedNodesWithChildren = new HashSet<HGNode>();
-    _listenerList = new ListenerList<>();
+    _listenerList = new CopyOnWriteArrayList<>();
 
     //
     _sourceNode2CoreDependenciesMap = CacheBuilder.newBuilder().build(new CacheLoader<HGNode, Set<HGCoreDependency>>() {

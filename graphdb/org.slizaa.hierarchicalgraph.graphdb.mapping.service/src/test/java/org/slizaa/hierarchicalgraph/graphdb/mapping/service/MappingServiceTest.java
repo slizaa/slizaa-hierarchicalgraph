@@ -30,9 +30,6 @@ public class MappingServiceTest {
   @Test
   public void testMappingService() throws ClassNotFoundException {
 
-    // TODO: WORK-AROUND FOR SECURITY-EXCEPTION-BUG
-    Class<?> clazz = this.getClass().getClassLoader().loadClass("org.eclipse.core.runtime.SubMonitor");
-
     IMappingService mappingService = MappingFactory.createMappingServiceForStandaloneSetup();
 
     HGRootNode rootNode = mappingService

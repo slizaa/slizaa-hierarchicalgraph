@@ -1,6 +1,12 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.cypher;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.internal.BoltClientQueries;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.internal.ProxyDependencyQueriesHolder;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinitionProvider;
+import org.slizaa.scanner.api.util.IProgressMonitor;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -8,13 +14,7 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.function.Function;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.internal.BoltClientQueries;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.internal.ProxyDependencyQueriesHolder;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinitionProvider;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * <p>

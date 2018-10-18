@@ -1,6 +1,14 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.service.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.neo4j.driver.v1.types.Node;
+import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.hierarchicalgraph.core.model.*;
+import org.slizaa.hierarchicalgraph.core.model.impl.ExtendedHGRootNodeImpl;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IProxyDependencyDefinition;
+import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbDependencySource;
+import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbHierarchicalgraphFactory;
+import org.slizaa.scanner.api.util.IProgressMonitor;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,23 +16,7 @@ import java.util.concurrent.Future;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubMonitor;
-import org.neo4j.driver.v1.types.Node;
-import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
-import org.slizaa.hierarchicalgraph.core.model.HGNode;
-import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
-import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
-import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactory;
-import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactoryFunctions;
-import org.slizaa.hierarchicalgraph.core.model.IDependencySource;
-import org.slizaa.hierarchicalgraph.core.model.INodeSource;
-import org.slizaa.hierarchicalgraph.core.model.impl.ExtendedHGRootNodeImpl;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IProxyDependencyDefinition;
-import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbDependencySource;
-import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbHierarchicalgraphFactory;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * <p>
@@ -75,7 +67,6 @@ public class GraphFactoryFunctions {
    * <p>
    * </p>
    *
-   * @param hierachyResult
    * @param rootElement
    * @param nodeSourceCreator
    */
@@ -87,15 +78,18 @@ public class GraphFactoryFunctions {
     checkNotNull(nodeSourceCreator);
 
     // create sub monitor
-    final SubMonitor subMonitor = progressMonitor != null
-        ? SubMonitor.convert(progressMonitor, firstLevelNodeIds.length)
+    final IProgressMonitor subMonitor = progressMonitor != null
+        ? progressMonitor.subTask("Creating first level elements...")
+            .withParentConsumptionInPercentage(100)
+            .withTotalWorkTicks(firstLevelNodeIds.length)
+            .create()
         : null;
 
     for (int i = 0; i < firstLevelNodeIds.length; i++) {
 
       // increase sub monitor
       if (subMonitor != null) {
-        subMonitor.split(1);
+        subMonitor.advance(1);
       }
 
       createNodeIfAbsent(firstLevelNodeIds[i], rootElement, rootElement, nodeSourceCreator);
@@ -105,9 +99,6 @@ public class GraphFactoryFunctions {
   /**
    * <p>
    * </p>
-   *
-   * @param hierachyResult
-   * @param creator
    */
   public static void createHierarchy(List<Long[]> hierarchyNodeIds, HGRootNode rootElement,
       final Function<Long, INodeSource> nodeSourceCreator, IProgressMonitor progressMonitor) {
@@ -115,15 +106,19 @@ public class GraphFactoryFunctions {
     checkNotNull(hierarchyNodeIds);
 
     // create sub monitor
-    final SubMonitor subMonitor = progressMonitor != null ? SubMonitor.convert(progressMonitor, hierarchyNodeIds.size())
-        : null;
+    final IProgressMonitor subMonitor = progressMonitor != null
+            ? progressMonitor.subTask("Creating hierarchy...")
+            .withParentConsumptionInPercentage(100)
+            .withTotalWorkTicks(hierarchyNodeIds.size())
+            .create()
+            : null;
 
     //
     for (Long[] ids : hierarchyNodeIds) {
 
       // increase sub monitor
       if (subMonitor != null) {
-        subMonitor.split(1);
+        subMonitor.advance(1);
       }
 
       //
@@ -136,7 +131,6 @@ public class GraphFactoryFunctions {
    * <p>
    * </p>
    *
-   * @param asJsonArray
    * @param rootElement
    * @param dependencySourceCreator
    */
@@ -145,8 +139,12 @@ public class GraphFactoryFunctions {
       boolean reinitializeCaches, IProgressMonitor progressMonitor) {
 
     // create sub monitor
-    final SubMonitor subMonitor = progressMonitor != null ? SubMonitor.convert(progressMonitor, dependencies.size())
-        : null;
+    final IProgressMonitor subMonitor = progressMonitor != null
+            ? progressMonitor.subTask("Creating dependencies...")
+            .withParentConsumptionInPercentage(100)
+            .withTotalWorkTicks(dependencies.size())
+            .create()
+            : null;
 
     //
     List<HGCoreDependency> result = new LinkedList<HGCoreDependency>();
@@ -156,7 +154,7 @@ public class GraphFactoryFunctions {
 
       // increase sub monitor
       if (subMonitor != null) {
-        subMonitor.split(1);
+        subMonitor.advance(1);
       }
 
       //

@@ -1,13 +1,13 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.cypher;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IHierarchyDefinitionProvider;
+import org.slizaa.scanner.api.util.IProgressMonitor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IHierarchyDefinitionProvider;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public abstract class AbstractQueryBasedHierarchyProvider implements IHierarchyDefinitionProvider, IBoltClientAware {
 

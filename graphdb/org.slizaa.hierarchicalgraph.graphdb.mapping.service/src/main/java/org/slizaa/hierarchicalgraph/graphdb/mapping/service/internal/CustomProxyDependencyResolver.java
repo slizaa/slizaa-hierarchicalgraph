@@ -49,8 +49,6 @@ public class CustomProxyDependencyResolver implements IProxyDependencyResolver {
      * <p>
      * Creates a new instance of type {@link ProxyDependencyResolverJob}.
      * </p>
-     *
-     * @param resolveFunction
      */
     public ProxyDependencyResolverJob(HGProxyDependency proxyDependency) {
 

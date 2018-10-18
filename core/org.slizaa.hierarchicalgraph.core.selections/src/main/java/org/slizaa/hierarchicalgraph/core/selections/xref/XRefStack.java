@@ -1,18 +1,5 @@
 package org.slizaa.hierarchicalgraph.core.selections.xref;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Stack;
-import java.util.function.Consumer;
-
-import org.eclipse.core.runtime.ListenerList;
 import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.SourceOrTarget;
@@ -21,6 +8,13 @@ import org.slizaa.hierarchicalgraph.core.selections.XReferenceSelection;
 import org.slizaa.hierarchicalgraph.core.selections.selector.DefaultDependencySelector;
 import org.slizaa.hierarchicalgraph.core.selections.selector.IDependencySelector;
 import org.slizaa.hierarchicalgraph.core.selections.xref.internal.UnmodifiableIDependencySelector;
+
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Consumer;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 /**
  * <p>
@@ -58,7 +52,7 @@ public class XRefStack {
   private int                         _currentCropPosition;
 
   /** - */
-  private ListenerList<IXRefListener> _listenerList;
+  private List<IXRefListener> _listenerList;
 
   /**
    * <p>
@@ -76,7 +70,7 @@ public class XRefStack {
     _selectedCenterNodes = Collections.emptyList();
 
     //
-    _listenerList = new ListenerList<>();
+    _listenerList = new CopyOnWriteArrayList<>();
     _selectionStack = new Stack<>();
 
     //

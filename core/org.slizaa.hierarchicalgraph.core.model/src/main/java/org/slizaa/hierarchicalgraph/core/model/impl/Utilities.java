@@ -1,14 +1,5 @@
 package org.slizaa.hierarchicalgraph.core.model.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactoryFunctions.removeDependency;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -17,6 +8,15 @@ import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.spi.IProxyDependencyResolver;
 import org.slizaa.hierarchicalgraph.core.model.spi.IProxyDependencyResolver.IProxyDependencyResolverJob;
+import org.slizaa.scanner.api.util.IProgressMonitor;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactoryFunctions.removeDependency;
 
 /**
  * <p>
