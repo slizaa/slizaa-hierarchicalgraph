@@ -1,12 +1,12 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.cypher;
 
 import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.core.progressmonitor.IProgressMonitor;
 import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.internal.BoltClientQueries;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.cypher.internal.ProxyDependencyQueriesHolder;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinitionProvider;
-import org.slizaa.scanner.api.util.IProgressMonitor;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -122,8 +122,7 @@ public abstract class AbstractQueryBasedDependencyProvider implements IDependenc
    * <p>
    * </p>
    *
-   * @param simpleDependencyQueries
-   * @param detailDependencyQueries
+   * @param simpleDependencyQuery
    */
   protected void addSimpleDependencyDefinitions(String simpleDependencyQuery) {
 

@@ -7,8 +7,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slizaa.core.progressmonitor.IProgressMonitor;
 import org.slizaa.hierarchicalgraph.core.model.impl.Utilities;
-import org.slizaa.scanner.api.util.IProgressMonitor;
 
 /**
  * <p>

@@ -2,13 +2,13 @@ package org.slizaa.hierarchicalgraph.graphdb.mapping.service.internal;
 
 import org.neo4j.driver.v1.types.Node;
 import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.core.progressmonitor.IProgressMonitor;
 import org.slizaa.hierarchicalgraph.core.model.*;
 import org.slizaa.hierarchicalgraph.core.model.impl.ExtendedHGRootNodeImpl;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IProxyDependencyDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbDependencySource;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbHierarchicalgraphFactory;
-import org.slizaa.scanner.api.util.IProgressMonitor;
 
 import java.util.LinkedList;
 import java.util.List;

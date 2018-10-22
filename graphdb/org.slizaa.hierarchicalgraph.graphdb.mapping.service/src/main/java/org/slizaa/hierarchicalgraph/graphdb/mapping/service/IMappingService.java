@@ -1,10 +1,10 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.service;
 
 import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.core.progressmonitor.IProgressMonitor;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.service.internal.DefaultMappingService;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
-import org.slizaa.scanner.api.util.IProgressMonitor;
 
 /**
  * <p>

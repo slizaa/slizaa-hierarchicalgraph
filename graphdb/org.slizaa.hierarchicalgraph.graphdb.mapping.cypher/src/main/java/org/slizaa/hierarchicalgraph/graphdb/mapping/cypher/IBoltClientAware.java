@@ -4,7 +4,7 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.cypher;
 
 import org.slizaa.core.boltclient.IBoltClient;
-import org.slizaa.scanner.api.util.IProgressMonitor;
+import org.slizaa.core.progressmonitor.IProgressMonitor;
 
 /**
  * <p>

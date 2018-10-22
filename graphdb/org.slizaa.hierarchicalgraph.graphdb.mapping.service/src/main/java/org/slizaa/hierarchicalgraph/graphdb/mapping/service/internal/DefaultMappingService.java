@@ -3,6 +3,7 @@ package org.slizaa.hierarchicalgraph.graphdb.mapping.service.internal;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.core.progressmonitor.IProgressMonitor;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactory;
 import org.slizaa.hierarchicalgraph.core.model.INodeSource;
@@ -21,7 +22,6 @@ import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbHierarchicalgraphFactory;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbNodeSource;
 import org.slizaa.hierarchicalgraph.graphdb.model.GraphDbRootNodeSource;
-import org.slizaa.scanner.api.util.IProgressMonitor;
 
 import java.util.List;
 import java.util.Optional;

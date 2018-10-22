@@ -4,11 +4,11 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.slizaa.core.progressmonitor.IProgressMonitor;
 import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.spi.IProxyDependencyResolver;
 import org.slizaa.hierarchicalgraph.core.model.spi.IProxyDependencyResolver.IProxyDependencyResolverJob;
-import org.slizaa.scanner.api.util.IProgressMonitor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

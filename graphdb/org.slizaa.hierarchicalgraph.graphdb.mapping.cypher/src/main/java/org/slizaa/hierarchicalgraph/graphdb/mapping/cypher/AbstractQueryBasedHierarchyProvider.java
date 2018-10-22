@@ -1,8 +1,8 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.cypher;
 
 import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.core.progressmonitor.IProgressMonitor;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IHierarchyDefinitionProvider;
-import org.slizaa.scanner.api.util.IProgressMonitor;
 
 import java.util.ArrayList;
 import java.util.List;
