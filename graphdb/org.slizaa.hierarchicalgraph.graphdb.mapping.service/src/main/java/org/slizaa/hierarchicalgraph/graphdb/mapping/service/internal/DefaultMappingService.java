@@ -4,6 +4,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slizaa.core.boltclient.IBoltClient;
 import org.slizaa.core.progressmonitor.IProgressMonitor;
+import org.slizaa.core.progressmonitor.NullProgressMonitor;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphFactory;
 import org.slizaa.hierarchicalgraph.core.model.INodeSource;
@@ -79,14 +80,12 @@ public class DefaultMappingService implements IMappingService {
         checkNotNull(mappingDescriptor);
         checkNotNull(boltClient);
 
-        try {
-            // create the sub monitor
-            IProgressMonitor subMonitor = progressMonitor != null ?
-                    progressMonitor.subTask("Converting...")
-                            .withParentConsumptionInPercentage(100)
-                            .withTotalWorkTicks(100)
-                            .create() : null;
+        //
+        if (progressMonitor == null) {
+            progressMonitor = new NullProgressMonitor();
+        }
 
+        try {
             // create the root element
             final HGRootNode rootNode = HierarchicalgraphFactory.eINSTANCE.createHGRootNode();
             rootNode.registerExtension(IBoltClient.class, boltClient);
@@ -102,18 +101,22 @@ public class DefaultMappingService implements IMappingService {
             if (hierarchyProvider != null) {
 
                 //
-                report(subMonitor, "Requesting root nodes...");
+                progressMonitor.step("Requesting root nodes...");
                 List<Long> rootNodes = hierarchyProvider.getToplevelNodeIds();
 
-                report(subMonitor, "Creating root nodes...");
-                createFirstLevelElements(rootNodes.toArray(new Long[0]), rootNode, createNodeSourceFunction, progressMonitor);
+                createFirstLevelElements(rootNodes.toArray(new Long[0]), rootNode, createNodeSourceFunction, progressMonitor.subTask("Creating root nodes...")
+                    .withParentConsumptionInPercentage(15)
+                    .withTotalWorkTicks(100)
+                    .create());
 
                 //
-                report(subMonitor, "Requesting nodes...");
+                progressMonitor.step("Requesting nodes...");
                 List<Long[]> parentChildNodeIds = hierarchyProvider.getParentChildNodeIds();
 
-                report(subMonitor, "Creating nodes...");
-                createHierarchy(parentChildNodeIds, rootNode, createNodeSourceFunction, progressMonitor);
+                createHierarchy(parentChildNodeIds, rootNode, createNodeSourceFunction, progressMonitor.subTask("Creating nodes...")
+                    .withParentConsumptionInPercentage(40)
+                    .withTotalWorkTicks(100)
+                    .create());
 
                 // filter 'dangling' nodes
                 removeDanglingNodes(rootNode);
@@ -124,16 +127,16 @@ public class DefaultMappingService implements IMappingService {
 
                 if (dependencyProvider != null) {
 
-                    report(subMonitor, "Creating dependencies...");
-
                     //
                     createDependencies(dependencyProvider.getDependencies(), rootNode,
-                            (id, type) -> GraphFactoryFunctions.createDependencySource(id, type, null), false, progressMonitor);
+                            (id, type) -> GraphFactoryFunctions.createDependencySource(id, type, null), false, progressMonitor.subTask("Creating dependencies...")
+                            .withParentConsumptionInPercentage(45)
+                            .withTotalWorkTicks(100)
+                            .create());
                 }
             }
 
             // register default extensions
-
             rootNode.registerExtension(IProxyDependencyResolver.class, new CustomProxyDependencyResolver());
             rootNode.registerExtension(IMappingProvider.class, mappingDescriptor);
             rootNode.registerExtension(INodeComparator.class, mappingDescriptor.getNodeComparator());
@@ -156,7 +159,6 @@ public class DefaultMappingService implements IMappingService {
             }
 
             //
-            // return addEditingDomain(rootNode);
             return rootNode;
         }
         //
@@ -209,66 +211,6 @@ public class DefaultMappingService implements IMappingService {
      * <p>
      * </p>
      *
-     * @param rootNode
-     * @param dependencyQueries
-     * @param dependencyLoopMonitor
-     */
-    // TODO
-    // private void resolveDependencyQueries(final HGRootNode rootNode, List<DependencyQuery> dependencyQueries,
-    // SubMonitor dependencyLoopMonitor) {
-    //
-    // //
-    // dependencyQueries.forEach((dependencyQuery) -> {
-    //
-    // try {
-    // SubMonitor iterationMonitor = dependencyLoopMonitor != null ? dependencyLoopMonitor.split(1) : null;
-    //
-    // // request dependencies
-    // report(iterationMonitor, "Requesting dependencies...");
-    // JsonArray jsonArray = dependencyQuery.getFuture().get().getAsJsonArray("data");
-    //
-    // // create dependencies
-    // report(iterationMonitor, "Creating dependencies...");
-    // createDependencies(jsonArray, rootNode,
-    // (id, type) -> GraphFactoryFunctions.createDependencySource(id, type,
-    // dependencyQueries.size() > 1 ? dependencyQuery.getDependencyMapping() : null),
-    // dependencyQuery.getDependencyMapping().isProxyDependency(), false, iterationMonitor);
-    //
-    // } catch (Exception e) {
-    // throw new HierarchicalGraphMappingException(e);
-    // }
-    // });
-    // }
-
-    // /**
-    // * <p>
-    // * </p>
-    // *
-    // * @param rootNode
-    // * @return
-    // */
-    // private HGRootNode addEditingDomain(HGRootNode rootNode) {
-    //
-    // //
-    // Resource resource = new ResourceSetImpl().createResource(URI.createURI("memory://localhost/hierarchicalgraph"));
-    //
-    // //
-    // BasicCommandStack basicCommandStack = new BasicCommandStack();
-    // AdapterFactoryEditingDomain adapterFactoryEditingDomain = new AdapterFactoryEditingDomain(
-    // new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE), basicCommandStack);
-    // resource.eAdapters().add(new AdapterFactoryEditingDomain.EditingDomainProvider(adapterFactoryEditingDomain));
-    //
-    // //
-    // resource.getContents().add(rootNode);
-    //
-    // //
-    // return rootNode;
-    // }
-
-    /**
-     * <p>
-     * </p>
-     *
      * @param iterationMonitor
      * @param taskName
      */
@@ -277,53 +219,4 @@ public class DefaultMappingService implements IMappingService {
             iterationMonitor.step(taskName);
         }
     }
-
-    // /**
-    // * <p>
-    // * </p>
-    // *
-    // * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
-    // */
-    // private class AggregatedDependencyQueryHolder {
-    //
-    // /** - */
-    // private Future<StatementResult> _future;
-    //
-    // /** - */
-    // private AggregatedDependencyQuery _aggregatedDependencyQuery;
-    //
-    // /**
-    // * <p>
-    // * Creates a new instance of type {@link AggregatedDependencyQuery}.
-    // * </p>
-    // *
-    // * @param aggregatedDependencyQuery
-    // * @param future
-    // */
-    // public AggregatedDependencyQueryHolder(AggregatedDependencyQuery aggregatedDependencyQuery,
-    // Future<StatementResult> future) {
-    // this._future = checkNotNull(future);
-    // this._aggregatedDependencyQuery = checkNotNull(aggregatedDependencyQuery);
-    // }
-    //
-    // /**
-    // * <p>
-    // * </p>
-    // *
-    // * @return
-    // */
-    // public Future<StatementResult> getFuture() {
-    // return _future;
-    // }
-    //
-    // /**
-    // * <p>
-    // * </p>
-    // *
-    // * @return
-    // */
-    // public AggregatedDependencyQuery getAggregatedDependencyQuery() {
-    // return _aggregatedDependencyQuery;
-    // }
-    // }
 }

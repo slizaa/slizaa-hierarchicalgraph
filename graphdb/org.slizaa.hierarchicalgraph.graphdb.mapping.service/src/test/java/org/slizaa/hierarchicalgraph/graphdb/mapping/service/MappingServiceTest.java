@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.slizaa.core.boltclient.testfwk.BoltClientConnectionRule;
+import org.slizaa.core.progressmonitor.DefaultProgressMonitor;
 import org.slizaa.hierarchicalgraph.core.algorithms.AdjacencyMatrix;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.graphdb.testfwk.GraphDatabaseSetupRule;
@@ -33,7 +34,7 @@ public class MappingServiceTest {
     IMappingService mappingService = MappingFactory.createMappingServiceForStandaloneSetup();
 
     HGRootNode rootNode = mappingService
-        .convert(new SimpleJTypeMappingProvider(), graphDatabaseSetup.getBoltClient(), null);
+        .convert(new SimpleJTypeMappingProvider(), graphDatabaseSetup.getBoltClient(), new DefaultProgressMonitor("Mapping...", 100, DefaultProgressMonitor.consoleLogger()));
 
     assertThat(rootNode.getChildren()).hasSize(2);
 
