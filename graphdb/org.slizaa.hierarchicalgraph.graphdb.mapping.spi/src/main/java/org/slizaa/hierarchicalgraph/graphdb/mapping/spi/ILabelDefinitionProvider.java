@@ -38,7 +38,7 @@ public interface ILabelDefinitionProvider {
      *
      * @return
      */
-    URL getBaseImage();
+    String getBaseImagePath();
 
     /**
      * <p>
@@ -56,7 +56,7 @@ public interface ILabelDefinitionProvider {
      * @param overlayPosition
      * @return
      */
-    URL getOverlayImage(OverlayPosition overlayPosition);
+    String getOverlayImagePath(OverlayPosition overlayPosition);
 
     /**
      * <p>

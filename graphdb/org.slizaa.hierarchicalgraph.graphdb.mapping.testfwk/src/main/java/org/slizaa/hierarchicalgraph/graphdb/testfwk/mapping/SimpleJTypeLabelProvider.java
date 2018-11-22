@@ -35,8 +35,8 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
         when(nodeHasLabel("Type")).then(layoutType()).
 
         // all other nodes
-        otherwise(setBaseImage(fromClasspath("icons/jar_obj.png")).
-              and(setLabelText(propertyValue("name"))));
+        otherwise(setBaseImage("icons/jar_obj.png")).
+              and(setLabelText(propertyValue("name")));
 
     //@formatter:on
   }
@@ -48,7 +48,7 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
    * @return
    */
   protected ILabelDefinitionProcessor layoutModule() {
-    return setBaseImage(fromClasspath("icons/jar_obj.png")).and(setLabelText(propertyValue("name")));
+    return setBaseImage("icons/jar_obj.png").and(setLabelText(propertyValue("name")));
   }
 
   /**
@@ -64,12 +64,12 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
 
         // Packages
         when(nodeHasLabel("Package")).
-          then(setBaseImage(fromClasspath("icons/package_obj.png")).
+          then(setBaseImage("icons/package_obj.png").
            and(setLabelText(propertyValue("fqn", str -> str.replace('/', '.'))))).
 
         // Directories
-        otherwise(setBaseImage(fromClasspath("icons/fldr_obj.png")).
-              and(setLabelText(propertyValue("fqn"))));
+        otherwise(setBaseImage("icons/fldr_obj.png")).
+              and(setLabelText(propertyValue("fqn")));
     //@formatter:on
   }
 
@@ -79,8 +79,8 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
     return executeAll(
 
         exclusiveChoice().
-          when(nodeHasLabel("ClassFile")).then(setBaseImage(fromClasspath("icons/classf_obj.png"))).
-          otherwise(setBaseImage(fromClasspath("icons/file_obj.png"))),
+          when(nodeHasLabel("ClassFile")).then(setBaseImage("icons/classf_obj.png")).
+          otherwise(setBaseImage("icons/file_obj.png")),
 
         setLabelText(propertyValue("name"))
     );
@@ -101,19 +101,19 @@ public class SimpleJTypeLabelProvider extends AbstractLabelDefinitionProvider im
         setLabelText(propertyValue("name")),
 
         when(nodeHasProperty("final")).
-          then(setOverlayImage(fromClasspath("icons/class_obj.png"), OverlayPosition.TOP_RIGHT)),
+          then(setOverlayImage("icons/class_obj.png", OverlayPosition.TOP_RIGHT)),
 
         when(nodeHasLabel("Class")).
-          then(setBaseImage(fromClasspath("icons/class_obj.png"))),
+          then(setBaseImage("icons/class_obj.png")),
 
         when(nodeHasLabel("Annotation")).
-          then(setBaseImage(fromClasspath("icons/annotation_obj.png"))),
+          then(setBaseImage("icons/annotation_obj.png")),
 
         when(nodeHasLabel("Enum")).
-          then(setBaseImage(fromClasspath("icons/enum_obj.png"))),
+          then(setBaseImage("icons/enum_obj.png")),
 
         when(nodeHasLabel("Interface")).
-          then(setBaseImage(fromClasspath("icons/int_obj.png")))
+          then(setBaseImage("icons/int_obj.png"))
         );
     //@formatter:on
   }

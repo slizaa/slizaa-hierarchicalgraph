@@ -54,27 +54,26 @@ public class LabelMappingDsl {
    * <p>
    * </p>
    *
-   * @param imageUrl
+   * @param path
    * @return
    */
-  public ILabelDefinitionProcessor setBaseImage(URL imageUrl) {
-    return (node, labelDefinition) -> labelDefinition.setBaseImage(checkNotNull(imageUrl));
+  public ILabelDefinitionProcessor setBaseImage(String path) {
+    return (node, labelDefinition) -> labelDefinition.setBaseImage(checkNotNull(path));
   }
 
   /**
    * <p>
    * </p>
    *
-   * @param imageUrl
+   * @param path
    * @param overlayPosition
    * @return
    */
-  public ILabelDefinitionProcessor setOverlayImage(URL imageUrl, OverlayPosition overlayPosition) {
-    return (node, labelDefinition) -> labelDefinition.setOverlayImage(checkNotNull(imageUrl),
+  public ILabelDefinitionProcessor setOverlayImage(String path, OverlayPosition overlayPosition) {
+    return (node, labelDefinition) -> labelDefinition.setOverlayImage(checkNotNull(path),
         checkNotNull(overlayPosition));
   }
 
-  // TODO: Rename to setLabelText
   public ILabelDefinitionProcessor setLabelText(String textLabel) {
     return (node, labelDefinition) -> labelDefinition.setText(textLabel);
   }
@@ -114,19 +113,6 @@ public class LabelMappingDsl {
     checkNotNull(propertyName);
     return (node) -> nodeSource(node).getProperties().containsKey(propertyName)
         && nodeSource(node).getProperties().get(propertyName).equals(value);
-  }
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @param path
-   * @return
-   */
-  public URL fromClasspath(String path) {
-    URL url = this.getClass().getClassLoader().getResource(checkNotNull(path));
-    checkNotNull(url);
-    return url;
   }
 
   /**

@@ -16,19 +16,19 @@ import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider
 public class DefaultLabelDefinition implements ILabelDefinition {
 
   /** - */
-  private URL    _baseImage          = null;
+  private String    _baseImage          = null;
 
   /** - */
-  private URL    _overlayTopRight    = null;
+  private String    _overlayTopRight    = null;
 
   /** - */
-  private URL    _overlayBottomRight = null;
+  private String    _overlayBottomRight = null;
 
   /** - */
-  private URL    _overlayTopLeft     = null;
+  private String    _overlayTopLeft     = null;
 
   /** - */
-  private URL    _overlayBottomLeft  = null;
+  private String    _overlayBottomLeft  = null;
 
   /** - */
   private String _text;
@@ -45,7 +45,7 @@ public class DefaultLabelDefinition implements ILabelDefinition {
    * {@inheritDoc}
    */
   @Override
-  public URL getBaseImage() {
+  public String getBaseImagePath() {
     return this._baseImage;
   }
 
@@ -66,7 +66,7 @@ public class DefaultLabelDefinition implements ILabelDefinition {
   }
 
   @Override
-  public URL getOverlayImage(OverlayPosition overlayPosition) {
+  public String getOverlayImagePath(OverlayPosition overlayPosition) {
     switch (checkNotNull(overlayPosition)) {
     case TOP_RIGHT:
       return this._overlayTopRight;
@@ -89,11 +89,11 @@ public class DefaultLabelDefinition implements ILabelDefinition {
     return this._text;
   }
 
-  public void setBaseImage(URL baseImage) {
+  public void setBaseImage(String baseImage) {
     this._baseImage = baseImage;
   }
 
-  public void setOverlayImage(URL image, OverlayPosition position) {
+  public void setOverlayImage(String image, OverlayPosition position) {
     switch (checkNotNull(position)) {
     case TOP_RIGHT:
       this._overlayTopRight = image;
