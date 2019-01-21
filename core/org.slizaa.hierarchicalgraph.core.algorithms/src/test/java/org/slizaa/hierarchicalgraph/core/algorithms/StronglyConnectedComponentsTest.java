@@ -17,7 +17,7 @@ public class StronglyConnectedComponentsTest {
     public void detectCycle() {
 
         //
-        List<HGNode> nodes = TestModelCreator.createDummyModel();
+        List<HGNode> nodes = null;
 
         //
         List<List<HGNode>> stronglyConnectedComponents = GraphUtils.detectStronglyConnectedComponents(nodes);

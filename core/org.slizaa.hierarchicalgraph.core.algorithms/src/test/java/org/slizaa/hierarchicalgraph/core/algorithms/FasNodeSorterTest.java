@@ -13,7 +13,7 @@ public class FasNodeSorterTest {
     public void sortNodes() {
 
         //
-        List<HGNode> nodes = TestModelCreator.createDummyModel();
+        List<HGNode> nodes = null;
 
         //
         INodeSorter nodeSorter = GraphUtils.createFasNodeSorter();
