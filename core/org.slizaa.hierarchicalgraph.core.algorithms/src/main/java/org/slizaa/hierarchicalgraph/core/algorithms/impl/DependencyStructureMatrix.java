@@ -82,7 +82,7 @@ public class DependencyStructureMatrix implements IDependencyStructureMatrix {
             INodeSorter.SortResult sortResult = artifactSorter.sort(cycle);
             cycle.clear();
             cycle.addAll(sortResult.getOrderedNodes());
-            upwardDependencies.addAll(sortResult.getUpwardsDependencies());
+            upwardDependencies.addAll(sortResult.getUpwardDependencies());
         }
 
         List<HGNode> orderedArtifacts = new ArrayList<>();

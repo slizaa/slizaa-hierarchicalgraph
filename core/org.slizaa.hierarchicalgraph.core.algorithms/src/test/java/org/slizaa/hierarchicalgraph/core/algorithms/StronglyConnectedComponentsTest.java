@@ -11,25 +11,39 @@ import org.slizaa.hierarchicalgraph.core.model.HGNode;
  * 
  * @author Gerd W&uuml;therich (gw@code-kontor.io)
  */
-public class StronglyConnectedComponentsTest {
+public class StronglyConnectedComponentsTest extends AbstractAlgorithmTest {
 
     @Test
-    public void detectCycle() {
+    public void detectSCCs() {
 
-        //
-        List<HGNode> nodes = null;
+		//
+		List<HGNode> nodes = _graphProvider.node(577L).getChildren();
 
         //
         List<List<HGNode>> stronglyConnectedComponents = GraphUtils.detectStronglyConnectedComponents(nodes);
 
         //
-        assertThat(stronglyConnectedComponents).hasSize(3);
+        assertThat(stronglyConnectedComponents).hasSize(25);
 
-        //
+		// @formatter:off
         for (List<HGNode> scc : stronglyConnectedComponents) {
             if (scc.size() == 2) {
-                assertThat(scc).contains(nodes.get(2)).contains(nodes.get(3));
+            	assertThat(scc).hasSize(10);
+                assertThat(scc)
+                	.containsExactlyInAnyOrder(
+                		node(19564),
+                		node(7155),
+                		node(19647),
+                		node(19397),
+                		node(20483),
+                		node(16667),
+                		node(14485),
+                		node(7676),
+                		node(14576),
+                		node(14903)
+                	);
             }
         }
+		// @formatter:on
     }
 }

@@ -69,7 +69,7 @@ public class FastFasSorter implements INodeSorter {
             }
 
             @Override
-            public List getUpwardsDependencies() {
+            public List getUpwardDependencies() {
                 return upwardsDependencies;
             }
         };

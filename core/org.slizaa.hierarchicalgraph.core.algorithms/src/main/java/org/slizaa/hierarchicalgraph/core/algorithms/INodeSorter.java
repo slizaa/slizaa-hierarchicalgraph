@@ -16,6 +16,6 @@ public interface INodeSorter {
 
         List<HGNode> getOrderedNodes();
 
-        List<AbstractHGDependency> getUpwardsDependencies();
+        List<AbstractHGDependency> getUpwardDependencies();
     }
 }
