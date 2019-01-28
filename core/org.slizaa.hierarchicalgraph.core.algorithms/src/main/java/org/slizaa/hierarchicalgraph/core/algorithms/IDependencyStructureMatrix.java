@@ -22,4 +22,6 @@ public interface IDependencyStructureMatrix {
     boolean isRowInCycle(int i);
 
     int getWeight(int i, int j);
+    
+    int[][] getMatrix();
 }

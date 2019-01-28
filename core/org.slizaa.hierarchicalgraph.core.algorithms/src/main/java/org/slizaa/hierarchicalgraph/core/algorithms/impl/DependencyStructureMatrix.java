@@ -70,8 +70,26 @@ public class DependencyStructureMatrix implements IDependencyStructureMatrix {
     public List<List<HGNode>> getCycles() {
         return cycles;
     }
+    
+    @Override
+	public int[][] getMatrix() {
+    	
+    	//
+    	int[][] result = new int[nodes.size()][nodes.size()];
+    	
+    	//
+    	for (int i = 0; i < nodes.size(); i++) {
+        	for (int j = 0; j < nodes.size(); j++) {
+        		HGAggregatedDependency dependency = nodes.get(i).getOutgoingDependenciesTo(nodes.get(j));
+        		result[i][j] = dependency != null ? dependency.getAggregatedWeight() : 0;
+    		}
+		}
+    	
+    	//
+    	return result;
+	}
 
-    private void initialize(Collection<HGNode> unorderedArtifacts) {
+	private void initialize(Collection<HGNode> unorderedArtifacts) {
         Objects.requireNonNull(unorderedArtifacts);
 
         upwardDependencies = new ArrayList<>();
