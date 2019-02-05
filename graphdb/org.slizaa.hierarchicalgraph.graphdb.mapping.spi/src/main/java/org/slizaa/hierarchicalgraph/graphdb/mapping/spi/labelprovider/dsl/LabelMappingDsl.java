@@ -77,6 +77,10 @@ public class LabelMappingDsl {
   public ILabelDefinitionProcessor setLabelText(String textLabel) {
     return (node, labelDefinition) -> labelDefinition.setText(textLabel);
   }
+  
+  public ILabelDefinitionProcessor setIsOverlayImage(boolean isOverlayImage) {
+    return (node, labelDefinition) -> labelDefinition.setIsOverlayImage(isOverlayImage);
+  }
 
   /**
    * <p>

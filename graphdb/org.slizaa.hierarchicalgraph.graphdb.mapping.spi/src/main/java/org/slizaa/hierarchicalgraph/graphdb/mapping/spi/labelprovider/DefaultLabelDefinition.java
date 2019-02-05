@@ -2,8 +2,6 @@ package org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.net.URL;
-
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider.ILabelDefinition;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider.OverlayPosition;
 
@@ -32,6 +30,14 @@ public class DefaultLabelDefinition implements ILabelDefinition {
 
   /** - */
   private String _text;
+  
+  /** - */
+  private boolean _isOverlayImage;
+  
+  @Override
+  public boolean isOverlayImage() {
+    return _isOverlayImage || _overlayTopRight != null || _overlayBottomRight != null || _overlayTopLeft != null || _overlayBottomLeft != null ;
+  }
 
   /**
    * {@inheritDoc}
@@ -89,6 +95,7 @@ public class DefaultLabelDefinition implements ILabelDefinition {
     return this._text;
   }
 
+  
   public void setBaseImage(String baseImage) {
     this._baseImage = baseImage;
   }
@@ -116,4 +123,7 @@ public class DefaultLabelDefinition implements ILabelDefinition {
     this._text = text;
   }
 
+  public void setIsOverlayImage(boolean isOverlayImage) {
+    _isOverlayImage = isOverlayImage;
+  }
 }

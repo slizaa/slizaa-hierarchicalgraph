@@ -1,7 +1,5 @@
 package org.slizaa.hierarchicalgraph.graphdb.mapping.spi;
 
-import java.net.URL;
-
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 public interface ILabelDefinitionProvider {
@@ -23,6 +21,12 @@ public interface ILabelDefinitionProvider {
    * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
    */
   public interface ILabelDefinition {
+
+    /**
+     * 
+     * @return
+     */
+    boolean isOverlayImage();
 
     /**
      * <p>
